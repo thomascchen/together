@@ -1,5 +1,7 @@
 == README
 
+![Build Status](https://codeship.com/projects/89396/status?branch=master)![Code Climate](https://codeclimate.com/github/thomascchen/together.png) ![Coverage Status](https://coveralls.io/repos/thomascchen/together/badge.png)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
