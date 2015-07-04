@@ -32,6 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :test do
   gem 'coveralls', require: false
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :development, :test do
@@ -43,14 +44,14 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
+  
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl'
   gem 'valid_attribute'
+  gem 'shoulda-matchers', require: false
 end
 
-gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
 gem 'foundation-rails'
