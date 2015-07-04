@@ -1,7 +1,17 @@
 require 'rails_helper'
 
-feature 'user signs in', %Q{
-  As a signed up user
-  I want to sign in
-  So that I can regain access to my account
+feature 'user creates in', %Q{
+  As an authorized user,
+  I want to add a grievance,
+  So that my neighbors can help me solve it
 } do
+
+# Acceptance Criteria
+# [ ] User is able to submit a new grievance
+# [ ] After successful submission, user is redirected to a list of grievances
+# [ ] User
+
+  scenario 'specify valid credentials' do
+
+  end
+end
