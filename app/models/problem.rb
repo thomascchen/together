@@ -1,7 +1,7 @@
 class Problem < ActiveRecord::Base
-  validates_presence_of :title
-  validates_presence_of :description
-  validates_presence_of :status
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :status, presence: true
   validates :category_id, presence: true, numericality: { only_integer: true }
   validates :user_id, presence: true, numericality: { only_integer: true }
 end
