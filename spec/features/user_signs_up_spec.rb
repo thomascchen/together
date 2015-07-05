@@ -50,4 +50,15 @@ feature 'user registers', %{
     expect(page).to have_content("can't be blank")
     expect(page).to_not have_content('Sign Out')
   end
+
+  scenario 'password confirmation does not match password' do
+    visit root_path
+    click_link 'Sign Up'
+    fill_in 'Password', with: 'password'
+    fill_in 'Password Confirmation', with: 'passwodr'
+
+    click_button 'Sign up'
+    expect(page).to have_content("doesn't match")
+    expect(page).to_not have_content('Sign Out')
+  end
 end
