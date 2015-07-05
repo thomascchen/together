@@ -11,7 +11,8 @@ feature 'user creates in', %{
   # [ ] After successful submission, user is redirected to a list of grievances
   # [ ] User
 
-  scenario 'specify valid credentials' do
-
-  end
+  pending
+  # scenario 'specify valid credentials' do
+  #
+  # end
 end

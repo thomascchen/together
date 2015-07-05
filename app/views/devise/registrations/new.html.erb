@@ -4,8 +4,33 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :first_name, "First Name" %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name, "Last Name" %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :building_id %><br />
+    <%= f.select :building_id, Building.all.map { |b| [b.street1, b.id] } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit, "Apartment Number" %><br />
+    <%= f.text_field :unit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :neighborhood_id %><br />
+    <%= f.select :neighborhood_id, Neighborhood.all.map { |n| [n.name, n.id] } %>
   </div>
 
   <div class="field">
@@ -17,7 +42,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, "Password Confirmation" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
