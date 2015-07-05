@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'shoulda-matchers'
 require File.join(File.dirname(__FILE__), 'support/valid_attribute')
 require File.join(File.dirname(__FILE__), 'support/factory_girl')
+require File.join(File.dirname(__FILE__), 'support/sign_in')
 require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
