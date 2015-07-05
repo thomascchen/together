@@ -11,7 +11,7 @@ feature 'user signs in', %{
   #     authenticated and I gain access to the system
   # [x] If I specify invalid email and password, I remain unauthenticated
   # [x] If I am already signed in, I can't sign in again
-
+  
   let(:user) { FactoryGirl.create(:user) }
 
   scenario 'existing user specifies valid credentials'  do

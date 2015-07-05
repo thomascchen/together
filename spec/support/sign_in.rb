@@ -10,5 +10,5 @@ module SignIn
 end
 
 RSpec.configure do |config|
-  config.include SignIn, :type => :feature
+  config.include SignIn, type: :feature
 end
