@@ -4,8 +4,8 @@ feature 'user signs out', %{
   As an authenticated user
   I want to sign out
   So that my identity is forgotten about on the machine I'm using
-} do
-  
+  } do
+
   # Acceptance Criteria
   # [x] If I'm signed in, i have an option to sign out
   # [x] When I opt to sign out, I get a confirmation that my identity has been
