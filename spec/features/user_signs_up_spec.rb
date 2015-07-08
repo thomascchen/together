@@ -17,7 +17,7 @@ feature 'user registers', %{
   scenario 'provide valid registration information' do
     neighborhood = Neighborhood.create(name: 'Jamaica Plain')
     building = Building.create(
-      street1: '21 Jumpstreet',
+      street: '21 Jumpstreet',
       city: 'Boston',
       state: 'MA',
       zip: '01230',
@@ -32,7 +32,7 @@ feature 'user registers', %{
     fill_in 'Email', with: 'john@example.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password Confirmation', with: 'password'
-    select building.street1, from: 'Building'
+    select building.street, from: 'Building'
     select neighborhood.name, from: 'Neighborhood'
 
     click_button 'Sign up'

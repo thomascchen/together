@@ -1,0 +1,25 @@
+<h1>Post New Problem</h1>
+
+<div>
+  <%= form_for [@user, @problem] do |f| %>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title, autofocus: true %>
+    </div>
+    <div>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+    <div>
+      <%= f.label :category_id %>
+      <%= f.select :category_id, Category.all.map { |c| [c.name, c.id] }, multiple: true %>
+    </div>
+    <div>
+      <%= f.label :deadline, "Deadline (Optional)" %>
+      <%= f.date_field :deadline, value: nil %>
+    </div>
+    <div>
+      <%= f.submit value: 'Post Your Problem' %>
+    </div>
+  <% end %>
+</div>

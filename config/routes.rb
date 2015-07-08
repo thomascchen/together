@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   root 'problems#index'
   devise_for :users
 
-  resources :problems, only: [:index]
+  resources :users, only: [:new, :create] do
+    resources :problems, except: [:index, :show]
+  end
+
+  resources :problems, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

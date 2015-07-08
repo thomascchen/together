@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Neighborhood.find_or_create_by(name: "Allston") # 1
+neighborhood = Neighborhood.find_or_create_by(name: "Allston") # 1
 Neighborhood.find_or_create_by(name: "Back Bay") # 2
 Neighborhood.find_or_create_by(name: "Bay Village") # 3
 Neighborhood.find_or_create_by(name: "Beacon Hill") # 4
@@ -29,16 +29,28 @@ Neighborhood.find_or_create_by(name: "South End") # 20
 Neighborhood.find_or_create_by(name: "West End") # 21
 Neighborhood.find_or_create_by(name: "West Roxbury") # 22
 
-# User.find_or_create_by(
-#   email: 'john@example.com',
-#   password: 'password',
-#   password_confirmation: 'password',
-#   first_name: 'John',
-#   last_name: 'Smith',
-#   unit: '1A',
-#   role: 'tenant',
-#   building_id: 1,
-#   neighborhood_id: 1,
-#   phone: '123-456-7890',
-#   description: 'This is a description.'
-# )
+building = Building.find_or_create_by(
+  street: '21 Jumpstreet',
+  city: 'Boston',
+  state: 'MA',
+  zip: '02130',
+  neighborhood_id: neighborhood.id
+)
+
+User.create(
+  email: 'john@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  first_name: 'John',
+  last_name: 'Smith',
+  unit: '1A',
+  role: 'tenant',
+  building_id: building.id,
+  neighborhood_id: neighborhood.id,
+  phone: '123-456-7890',
+  description: 'This is a description.'
+)
+
+Category.find_or_create_by(
+  name: 'Utilities'
+)
