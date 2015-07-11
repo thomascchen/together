@@ -20,7 +20,7 @@
 
   <div class="field">
     <%= f.label :building_id %><br />
-    <%= f.select :building_id, Building.all.map { |b| [b.street1, b.id] } %>
+    <%= f.select :building_id, Building.all.map { |b| [b.street, b.id] } %>
   </div>
 
   <div class="field">
