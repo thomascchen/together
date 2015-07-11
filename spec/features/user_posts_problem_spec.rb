@@ -7,23 +7,23 @@ feature 'user posts a new problem', %{
 } do
 
   # Acceptance Criteria
-  # [x] User must specify a title, description, and category for their problem
-  # [x] User can optionally specify a deadline by which their problem must be
-  #     resolved
-  # [x] After successful submission, user is shown a success message, and they
-  #     are redirected to problem show page
+  # [ ] User must specify a title, description, category and urgency level for
+  #     their problem
+  # [ ] After successful submission, user is shown a success message, and they
+  #     are redirected to their problem show page
   # [ ] If user submits incomplete information, they are shown an error message
   #     and the form is re-rendered with previously entered information
+  # [ ] User must be authenticated to post a new problem
 
   scenario 'authorized user enters valid information' do
     user = FactoryGirl.create(:user)
     category = Category.create(name: 'Utilities')
     sign_in(user)
-    click_link('Post New Problem')
+    click_link('Submit a Problem')
     fill_in 'Title', with: "Heat's broken!"
     fill_in 'Description', with: 'Heat is broken yet again!'
     select category.name, from: 'Category'
-    fill_in 'problem_deadline', with: '2015-08-20'
+
 
     click_button('Post Your Problem')
 
@@ -31,6 +31,17 @@ feature 'user posts a new problem', %{
     expect(page).to have_content("Heat's broken!")
   end
 
-  scenario 'authorized user enters invalid information'
+  scenario 'authorized user enters invalid information' do
+    user = FactoryGirl.create(:user)
+    category = Category.create(name: 'Utilities')
+    sign_in(user)
+    click_link('Post New Problem')
+
+    click_button('Post Your Problem')
+
+    expect(page).to have_content('Problem not saved')
+    expect(page).to have_content("can't be blank")
+    expect(page).to_not have_content("Heat's broken!")
+  end
 
 end
