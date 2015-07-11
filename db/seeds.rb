@@ -54,3 +54,7 @@ User.create(
 Category.find_or_create_by(
   name: 'Utilities'
 )
+
+UrgencyLevel.find_or_create_by(
+  name: 'Immediate'
+)
