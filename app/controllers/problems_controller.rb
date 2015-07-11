@@ -13,14 +13,18 @@ class ProblemsController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @problem = Problem.new
+    @categories = Category.all
+    @urgency_levels = UrgencyLevel.all
   end
 
   def create
     @user = User.find(params[:user_id])
     @problem = Problem.new(problem_params)
     @problem.user = @user
+    @categories = Category.all
+    @urgency_levels = UrgencyLevel.all
     if @problem.save
-      flash[:success] = "Problem posted successfully"
+      flash[:success] = "Problem submitted"
       redirect_to problem_path(@problem)
     else
       flash[:error] = "Problem not saved"
@@ -46,9 +50,9 @@ class ProblemsController < ApplicationController
     params.require(:problem).permit(
       :title,
       :description,
-      :deadline,
-      :status,
+      :status_id,
       :category_id,
+      :urgency_level_id,
       :user_id
     )
   end
