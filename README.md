@@ -2,6 +2,6 @@
 
 ![Code Climate](https://codeclimate.com/github/thomascchen/together.png)
 
-![Coverage Status](https://coveralls.io/repos/thomascchen/together/badge.svg?branch=master&service=github)](https://coveralls.io/github/thomascchen/together?branch=master)
+[![Coverage Status](https://coveralls.io/repos/thomascchen/together/badge.svg?branch=master&service=github)](https://coveralls.io/github/thomascchen/together?branch=master)
 
 **Together** is a tenant organizing app that helps people solve problems in their apartment building.
