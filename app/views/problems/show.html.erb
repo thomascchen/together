@@ -7,5 +7,5 @@
 <li>Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %></li>
 <li>Last updated at <%= @problem.updated_at %></li>
 <% if current_user == @problem.user %>
-  <li><%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %></li>
+  <li><%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> | <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete %></li>
 <% end %>

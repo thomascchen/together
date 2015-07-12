@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'user creates a new problem', %{
-  As an authorized user,
+  As an authenticated user,
   I want to submit a new problem in my building,
   So that I can get help solving it with my neighbors
 } do
