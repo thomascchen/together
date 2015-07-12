@@ -1,3 +1,5 @@
+## Together
+
 ![Build Status](https://codeship.com/projects/c09887b0-04b6-0133-8447-52ca95efad4a/status?branch=master)
 
 ![Code Climate](https://codeclimate.com/github/thomascchen/together.png)

@@ -51,10 +51,10 @@ User.create(
   description: 'This is a description.'
 )
 
-Category.find_or_create_by(
-  name: 'Utilities'
-)
+Category.find_or_create_by( name: 'Utilities' )
 
-UrgencyLevel.find_or_create_by(
-  name: 'Immediate'
-)
+UrgencyLevel.create( name: 'Immediate' )
+UrgencyLevel.create( name: 'Soon' )
+
+Status.create( name: 'Open' )
+Status.create( name: 'Solved' )
