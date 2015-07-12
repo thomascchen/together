@@ -47,7 +47,17 @@ feature 'user creates a new problem', %{
   end
 
   scenario 'unauthenticated user cannot submit a new problem' do
+    problem = FactoryGirl.create(
+      :problem,
+      user: user,
+      category: category,
+      urgency_level: urgency_level,
+      status: status
+    )
     visit root_path
     expect(page).to_not have_content('Report an Issue')
+
+    visit new_user_problem_path(user, problem)
+    expect(page).to_not have_selector('form')
   end
 end

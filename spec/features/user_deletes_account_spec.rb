@@ -18,11 +18,13 @@ feature 'user signs in', %{
     visit root_path
     click_link 'Account'
     click_button 'Delete My Account'
+
     expect(page).to have_content('Bye')
   end
 
   scenario 'unauthenticated cannot delete acount' do
     visit root_path
+
     expect(page).to_not have_content('Account')
     expect(page).to_not have_content('Sign Out')
   end

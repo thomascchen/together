@@ -1,7 +1,11 @@
 <h1><%= @problem.title %></h1>
 
+<li>Description: <%= @problem.description %></li>
 <li>Category: <%= link_to @problem.category.name, category_path(@problem.category) %></li>
 <li>Urgency: <%= link_to @problem.urgency_level.name, urgency_level_path(@problem.urgency_level) %></li>
 <li>Status: <%= link_to @problem.status.name, status_path(@problem.status) %></li>
 <li>Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %></li>
 <li>Last updated at <%= @problem.updated_at %></li>
+<% if current_user == @problem.user %>
+  <li><%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %></li>
+<% end %>
