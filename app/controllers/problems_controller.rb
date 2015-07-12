@@ -53,7 +53,13 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id]) unless !params[:user_id]
+    @problem = Problem.find(params[:id])
+    if @problem.destroy
+      flash[:message] = "Problem deleted"
+    else
+      flash[:message] = "Problem not deleted"
+    end
+    redirect_to problems_path
   end
 
   private

@@ -1,1 +1,1 @@
-repo_token: gfaASeRSW8A7hG42oJ16d5l5kgKIKlrX2
+repo_token: ENV["COVERALLS_REPO_TOKEN"]
