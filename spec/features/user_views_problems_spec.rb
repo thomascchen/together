@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'user views unsolved problems', %{
-  As an authorized user,
+  As a user,
   I can view a list of unsolved problems,
   So I can learn about existing problems in my building.
 } do
@@ -71,6 +71,7 @@ feature 'user views unsolved problems', %{
     click_on problem.title
 
     expect(page).to have_content(problem.title)
+    expect(page).to have_content(problem.description)
     expect(page).to have_content(problem.category.name)
     expect(page).to have_content(problem.urgency_level.name)
     expect(page).to have_content(problem.status.name)

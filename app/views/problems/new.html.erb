@@ -1,45 +1,4 @@
-<h1>Submit a Problem</h1>
-
-<% if @problem.errors.any? %>
-  <div>
-    <h2>
-      Please fix
-      <%= pluralize(@problem.errors.count, "error") %>:
-    </h2>
-    <p>
-      <% @problem.errors.full_messages.each do |msg| %>
-        <%= msg %><br>
-      <% end %>
-    </p>
-  </div>
+<% if user_signed_in? %>
+  <h1>Submit a Problem</h1>
+  <%= render 'form' %>
 <% end %>
-
-<div>
-  <%= form_for [@user, @problem] do |f| %>
-    <div>
-      <%= f.label :title %>
-      <%= f.text_field :title, autofocus: true, required: true %>
-    </div>
-    <div>
-      <%= f.label :description %>
-      <%= f.text_area :description, required: true %>
-    </div>
-    <div>
-      Choose a category
-      <% @categories.each do |category| %>
-        <%= f.radio_button(:category_id, category.id) %>
-        <%= f.label(:category_id, category.name) %>
-      <% end %>
-    </div>
-    <div>
-      How urgent is this?
-      <% @urgency_levels.each do |urgency_level| %>
-        <%= f.radio_button(:urgency_level_id, urgency_level.id) %>
-        <%= f.label(:urgency_level_id, urgency_level.name) %>
-      <% end %>
-    </div>
-    <div>
-      <%= f.submit "Submit" %>
-    </div>
-  <% end %>
-</div>
