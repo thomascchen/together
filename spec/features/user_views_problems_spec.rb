@@ -56,8 +56,14 @@ feature 'user views unsolved problems', %{
     expect(page).to have_content(problem.updated_at)
     expect(page).to have_content(problem3.title)
     expect(page).to_not have_content(problem2.title)
-    expect(page).to have_selector("div ul:nth-child(1) li", text: problem.title)
-    expect(page).to have_selector("div ul:nth-child(2) li", text: problem3.title)
+    expect(page).to have_selector(
+      "div ul:nth-child(1) li",
+      text: problem.title
+    )
+    expect(page).to have_selector(
+      "div ul:nth-child(2) li",
+      text: problem3.title
+    )
   end
 
   scenario 'user views problem show page' do
