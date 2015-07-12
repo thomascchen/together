@@ -1,9 +1,7 @@
 class ProblemsController < ApplicationController
   def index
-    @problems = Problem.all
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-    end
+    @problems = Problem.where(status_id: 1).order(:urgency_level_id)
+    @user = User.find(params[:user_id]) unless !params[:user_id]
   end
 
   def show

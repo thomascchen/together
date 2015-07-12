@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-feature 'user posts a new problem', %{
+feature 'user creates a new problem', %{
   As an authorized user,
-  I want to post a new problem in my building,
+  I want to submit a new problem in my building,
   So that I can get help solving it with my neighbors
 } do
 
@@ -18,6 +18,7 @@ feature 'user posts a new problem', %{
   let!(:user) { FactoryGirl.create(:user) }
   let!(:category) { Category.create(name: 'Heat and Essential') }
   let!(:urgency_level) { UrgencyLevel.create(name: 'Immediate') }
+  let!(:status) { Status.create(id: 1, name: 'Open') }
 
   scenario 'authenticated user enters valid information' do
     sign_in(user)
