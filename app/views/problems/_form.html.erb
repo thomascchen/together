@@ -41,3 +41,50 @@
     </div>
   <% end %>
 </div>
+
+<!-- <div id="SiteWrapper">
+  <% if @problem.errors.any? %>
+    <div>
+      <h2>
+        Please fix
+        <%= pluralize(@problem.errors.count, "error") %>:
+      </h2>
+      <p>
+        <% @problem.errors.full_messages.each do |msg| %>
+          <%= msg %><br>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+    <div id="SearchContainer">
+        <%= form_for [@user, @problem] do |f| %>
+            <div class="group">
+              <%= f.text_field :title, id: "Title", required: true %>
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <%= f.label :title %>
+            </div>
+            <div class="group">
+              <%= f.text_field :description, id: "Description", required: true %>
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <%= f.label :description %>
+            </div>
+
+            <div class="group">
+                <input type="text" id="Title" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Last Name (ex: Travolta)</label>
+            </div>
+
+            <div class="group">
+                <input type="text" id="Email" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>E-mail (ex: SatNight@Fever.com)</label>
+            </div>
+            <button type="submit" id="Send">Send Message</button>
+        <% end %>
+    </div>
+</div> -->

@@ -51,10 +51,16 @@ User.create(
   description: 'This is a description.'
 )
 
-Category.find_or_create_by(name: 'Utilities')
+Category.find_or_create_by(name: 'Repairs')
+Category.find_or_create_by(name: 'Heat and Essential')
+Category.find_or_create_by(name: 'Security')
+Category.find_or_create_by(name: 'Lease')
+Category.find_or_create_by(name: 'Security Deposit')
+Category.find_or_create_by(name: 'Other')
 
 UrgencyLevel.create(name: 'Immediate')
 UrgencyLevel.create(name: 'Soon')
+UrgencyLevel.create(name: 'Not Urgent')
 
 Status.create(name: 'Open')
 Status.create(name: 'Solved')
