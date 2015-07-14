@@ -8,9 +8,9 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:building_id) }
-    it { should validate_numericality_of(:building_id), only_intger: true }
+    it { should validate_numericality_of(:building_id).only_integer }
     it { should validate_presence_of(:neighborhood_id) }
-    it { should validate_numericality_of(:neighborhood_id), only_integer: true }
+    it { should validate_numericality_of(:neighborhood_id).only_integer }
 
     it { should have_valid(:first_name).when('John') }
     it { should_not have_valid(:first_name).when(nil, '') }
