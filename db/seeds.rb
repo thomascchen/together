@@ -62,5 +62,14 @@ UrgencyLevel.create(name: 'Immediate')
 UrgencyLevel.create(name: 'Soon')
 UrgencyLevel.create(name: 'Not Urgent')
 
-Status.create(name: 'Open')
-Status.create(name: 'Solved')
+Status.find_or_create_by(name: 'Open')
+Status.find_or_create_by(name: 'Solved')
+
+Problem.create(
+  title: "Problem!",
+  description: 'This a description',
+  category_id: 2,
+  urgency_level_id: 2,
+  status_id: 2,
+  user_id: 1
+)
