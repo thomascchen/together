@@ -8,7 +8,9 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:building_id) }
+    it { should validate_numericality_of(:building_id), only_intger: true }
     it { should validate_presence_of(:neighborhood_id) }
+    it { should validate_numericality_of(:neighborhood_id), only_integer: true }
 
     it { should have_valid(:first_name).when('John') }
     it { should_not have_valid(:first_name).when(nil, '') }
@@ -19,11 +21,20 @@ RSpec.describe User, type: :model do
     it { should have_valid(:email).when('john@example.com') }
     it { should_not have_valid(:email).when(nil, '', 'user', 'user@com') }
 
-    it { should have_valid(:last_name).when('Smith') }
-    it { should_not have_valid(:last_name).when(nil, '') }
+    it { should have_valid(:unit).when('1A') }
+    it { should_not have_valid(:unit).when(nil, '') }
+
+    it { should have_valid(:role).when('tenant') }
+    it { should_not have_valid(:role).when(nil, '') }
+
+    it { should have_valid(:building_id).when('1') }
+    it { should_not have_valid(:building_id).when(nil, '', 'one') }
+
+    it { should have_valid(:neighborhood_id).when('1') }
+    it { should_not have_valid(:neighborhood_id).when(nil, '', 'one') }
 
     it 'has matching password confirmation for the password' do
-      user = User.new
+      user = FactoryGirl.create(:user)
       user.password = 'password'
       user.password_confirmation = 'anotherpassword'
 
@@ -35,5 +46,14 @@ RSpec.describe User, type: :model do
   describe 'associations' do
     it { should belong_to(:neighborhood) }
     it { should belong_to(:building) }
+    it { should have_many(:problems) }
+  end
+
+  describe '#name' do
+    it 'returns true' do
+      user = FactoryGirl.create(:user, first_name: "Grace", last_name: "Boggs")
+
+      expect(user.name).to eq("Grace Boggs")
+    end
   end
 end
