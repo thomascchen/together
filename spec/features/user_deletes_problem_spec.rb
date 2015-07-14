@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user creates a new problem', %{
+feature 'user deletes a problem', %{
   As an authenticated user,
   I want to delete a problem,
   So that I can remove a problem that I no longer want it on the site.
@@ -10,7 +10,7 @@ feature 'user creates a new problem', %{
   # [x] User can delete a problem they created
   # [x] User can't delete a problem they didn't create
   # [x] User must be authenticated to delete a problem
-  # [ ] When user deletes problem, they are shown a confirmation modal and then
+  # [x] When user deletes problem, they are shown a confirmation modal and then
   #     a success message upon confirmation
 
   let!(:category) { Category.create(name: "Heat and Essential") }
@@ -27,12 +27,12 @@ feature 'user creates a new problem', %{
     )
   end
 
-  scenario 'user deletes problem they created' do
+  scenario 'user deletes problem they created', js: true do
     sign_in(user)
     click_on problem.title
-    click_on 'Delete'
+    click_link 'Delete'
 
-    # expect JS confirmation
+    click_link 'Delete', href: user_problem_path(problem.user, problem)
     expect(page).to have_content("Problem deleted")
     expect(page).to_not have_content("problem.title")
   end
@@ -42,12 +42,12 @@ feature 'user creates a new problem', %{
     visit root_path
 
     click_on problem.title
-    expect(page).to_not have_content("Delete")
+    expect(page).to_not have_link("Delete", href: '#')
 
     sign_in(user2)
     click_on problem.title
 
-    expect(page).to_not have_content("Delete")
+    expect(page).to_not have_link("Delete", href: '#')
   end
 
 end
