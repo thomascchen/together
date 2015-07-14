@@ -1,11 +1,37 @@
-<h1><%= @problem.title %></h1>
+<br />
+<br />
+<div class="row">
+    <div class="card">
+      <div class="content">
+        <span class="title"><%= @problem.title %></span>
+        <span class="right">
+          <span class="tags radius warning label"><%= @problem.category.name %></span>
+          <span class="tags radius alert label"><%= @problem.urgency_level.name %></span>
+          <span class="tags radius success label"><%= @problem.status.name %></span>
+        </span>
+        <p><%= @problem.description %></p>
+      </div>
+      <div class="action">
+        <span class="left">
+          <% if current_user == @problem.user %>
+            Submitted by <%= link_to "you", user_path(@problem.user) %> <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> <a href="#" data-reveal-id="deleteModal">Delete</a>
+          <% else %>
+            Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %>
+          <% end %>
+        </span>
+        <span class="right">
+          Last updated at <%= @problem.updated_at.to_formatted_s(:long_ordinal) %>
+        </span>
+      <br />
+      </div>
+    </div>
+    <br />
+  </div>
+</div>
 
-<li>Description: <%= @problem.description %></li>
-<li>Category: <%= link_to @problem.category.name, category_path(@problem.category) %></li>
-<li>Urgency: <%= link_to @problem.urgency_level.name, urgency_level_path(@problem.urgency_level) %></li>
-<li>Status: <%= link_to @problem.status.name, status_path(@problem.status) %></li>
-<li>Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %></li>
-<li>Last updated at <%= @problem.updated_at %></li>
-<% if current_user == @problem.user %>
-  <li><%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> | <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete %></li>
-<% end %>
+<div id="deleteModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Are you sure?</h2><br />
+  <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
+  <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete, class: "button radius", id: "delete-modal-button" %>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>

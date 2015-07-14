@@ -32,7 +32,7 @@ feature 'user updates problem', %{
 
   scenario 'authenticated user updates problem with valid information' do
     category2 = Category.create(name: 'Repairs')
-    urgency_level2 = UrgencyLevel.create(name: 'Not Urgent')
+    urgency_level2 = UrgencyLevel.create(id: 2, name: 'Not Urgent')
     sign_in(user)
     click_on problem.title
     click_on "Edit"

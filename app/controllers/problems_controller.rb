@@ -19,13 +19,14 @@ class ProblemsController < ApplicationController
   end
 
   def create
+    @user = User.find(params[:user_id])
     @problem = Problem.new(problem_params)
-    @problem.user = User.find(params[:user_id])
+    @problem.user = @user
     @categories = Category.all
     @urgency_levels = UrgencyLevel.all
     if @problem.save
       flash[:success] = "Problem submitted"
-      redirect_to problem_path(@problem)
+      redirect_to problems_path
     else
       flash.now[:error] = "Problem not saved"
       render :new
@@ -55,9 +56,9 @@ class ProblemsController < ApplicationController
   def destroy
     @problem = Problem.find(params[:id])
     if @problem.destroy
-      flash[:message] = "Problem deleted"
+      flash[:success] = "Problem deleted"
     else
-      flash[:message] = "Problem not deleted"
+      flash[:error] = "Problem not deleted"
     end
     redirect_to problems_path
   end

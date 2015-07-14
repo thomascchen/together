@@ -1,4 +1,4 @@
-<div>
+<!-- <div id="SiteWrapper">
   <% if @problem.errors.any? %>
     <div>
       <h2>
@@ -12,32 +12,61 @@
       </p>
     </div>
   <% end %>
+    <div id="SearchContainer">
+        <%= form_for [@user, @problem] do |f| %>
+            <div class="group">
+              <%= f.text_field :title, id: "Title", required: true %>
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <%= f.label :title %>
+            </div>
+            <div class="group">
+              <%= f.text_field :description, id: "Description", required: true %>
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <%= f.label :description %>
+            </div>
+            <div>
+              Choose a category
+              <% @categories.each do |category| %>
+            <ul class="button-group toggle" data-toggle="buttons-radio">
+              <li>
+                <%= f.radio_button(:category_id, category.id, { name: "r-group", "data-toggle" => "button" } )%>
+                <%= f.label(:category_id, category.name, { class: "button", for: "problem_category_id_#{category.id}" } ) %>
+              </li>
+            </ul>
+              <% end %>
+            </div> -->
 
-  <%= form_for [@user, @problem] do |f| %>
-    <div>
-      <%= f.label :title %>
-      <%= f.text_field :title, autofocus: true, required: true %>
+              <!-- <li>
+                <input type="radio" id="r2" name="r-group" data-toggle="button">
+                <label class="button" for="r2">Middle</label>
+              </li>
+              <li>
+                <input type="radio" id="r3" name="r-group" data-toggle="button">
+                <label class="button" for="r3">Right</label>
+              </li>
+            </ul>
+
+
+            <div>
+              Choose a category
+              <% @categories.each do |category| %>
+                <%= f.radio_button(:category_id, category.id) %>
+                <%= f.label(:category_id, category.name) %>
+              <% end %>
+            </div>
+            <div>
+              How urgent is this?
+              <% @urgency_levels.each do |urgency_level| %>
+                <%= f.radio_button(:urgency_level_id, urgency_level.id) %>
+                <%= f.label(:urgency_level_id, urgency_level.name) %>
+              <% end %>
+            </div>
+            <div>
+              <%= f.submit "Submit" %>
+            </div>
+            <button type="submit" id="Send">Send Message</button>
+        <% end %>
     </div>
-    <div>
-      <%= f.label :description %>
-      <%= f.text_area :description, required: true %>
-    </div>
-    <div>
-      Choose a category
-      <% @categories.each do |category| %>
-        <%= f.radio_button(:category_id, category.id) %>
-        <%= f.label(:category_id, category.name) %>
-      <% end %>
-    </div>
-    <div>
-      How urgent is this?
-      <% @urgency_levels.each do |urgency_level| %>
-        <%= f.radio_button(:urgency_level_id, urgency_level.id) %>
-        <%= f.label(:urgency_level_id, urgency_level.name) %>
-      <% end %>
-    </div>
-    <div>
-      <%= f.submit "Submit" %>
-    </div>
-  <% end %>
 </div>

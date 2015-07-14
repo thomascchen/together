@@ -53,15 +53,17 @@ feature 'user views unsolved problems', %{
     expect(page).to have_content(problem.urgency_level.name)
     expect(page).to have_content(problem.status.name)
     expect(page).to have_content(problem.user.name)
-    expect(page).to have_content(problem.updated_at)
+    expect(page).to have_content(
+      problem.updated_at.to_formatted_s(:long_ordinal)
+    )
     expect(page).to have_content(problem3.title)
     expect(page).to_not have_content(problem2.title)
     expect(page).to have_selector(
-      "div ul:nth-child(1) li",
+      "div .columns span:nth-child(1) a:first",
       text: problem.title
     )
     expect(page).to have_selector(
-      "div ul:nth-child(2) li",
+      "div .columns span:nth-child(1) a:last",
       text: problem3.title
     )
   end
@@ -76,6 +78,8 @@ feature 'user views unsolved problems', %{
     expect(page).to have_content(problem.urgency_level.name)
     expect(page).to have_content(problem.status.name)
     expect(page).to have_content(problem.user.name)
-    expect(page).to have_content(problem.updated_at)
+    expect(page).to have_content(
+      problem.updated_at.to_formatted_s(:long_ordinal)
+    )
   end
 end
