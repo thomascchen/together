@@ -32,6 +32,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :test do
   gem 'coveralls', require: false
   gem "codeclimate-test-reporter", require: nil
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
@@ -55,4 +58,3 @@ end
 
 gem 'devise'
 gem 'foundation-rails'
-gem 'poltergeist'
