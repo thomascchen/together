@@ -33,7 +33,6 @@ group :test do
   gem 'coveralls', require: false
   gem "codeclimate-test-reporter", require: nil
   gem 'poltergeist'
-  gem 'selenium-webdriver'
   gem 'database_cleaner'
 end
 
