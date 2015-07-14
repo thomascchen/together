@@ -29,6 +29,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise'
+gem 'foundation-rails'
+
 group :test do
   gem 'coveralls', require: false
   gem "codeclimate-test-reporter", require: nil
@@ -55,5 +58,7 @@ group :development, :test do
   gem 'pry-rails'
 end
 
-gem 'devise'
-gem 'foundation-rails'
+group :production do
+  gem 'rails_12factor'
+  gem 'puma'
+end
