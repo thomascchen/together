@@ -1,15 +1,16 @@
 html,
 body {
-  background: #FAFAFA;
+  background: #fafafa;
 }
 
 .card {
-  background: white;
+  background: #ffffff;
   border-radius: 2px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   color: #272727;
   font-family: 'Roboto', sans-serif;
   overflow: hidden;
+
   .title {
     font-size: 1.5rem;
     font-weight: 300;
@@ -34,18 +35,19 @@ body {
   a {
     color: #ffab40;
     margin-right: 1.3rem;
-    transition: color 0.3s ease;
-    text-transform: uppercase;
     text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
   }
 
   .image {
     position: relative;
+
     .title {
       bottom: 0;
+      color: #fff;
       left: 0;
       padding: 1.3rem;
-      color: #fff;
       position: absolute;
     }
 
@@ -63,7 +65,7 @@ $success-color: #43ac6a;
 $warning-color: #f08a24;
 $info-color: #a0d3e8;
 
-$selected-color: salmon;
+$selected-color: #fa8072;
 
 input[data-toggle] {
   display: none;
