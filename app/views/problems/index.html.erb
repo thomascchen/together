@@ -1,32 +1,9 @@
 <div class="row">
-    <div class="large-12 columns">
-      <div>
-        <h1>Problems</h1>
-      </div>
+  <div class="large-12 columns">
+    <div>
+      <h1>Problems</h1>
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="medium-12 columns end">
-    <% @problems.each do |problem| %>
-    <div class="card">
-      <div class="content">
-        <span class="title"><%= link_to problem.title, problem_path(problem) %></span>
-        <span class="right">
-          <span class="tags radius warning label"><%= problem.category.name %></span>
-          <span class="tags radius alert label"><%= problem.urgency_level.name %></span>
-          <span class="tags radius success label"><%= problem.status.name %></span>
-        </span>
-        <p>Two roads diverged in a yellow wood,	 And sorry I could not travel both	 And be one traveler, long I stood	 And looked down one as far as I could	. To where it bent in the undergrowth;</p>
-      </div>
-      <div class="action">
-        <span class="left">Submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>
-        <span class="right">Updated <%= problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
-      <br />
-      </div>
-    </div>
-    <br />
-    <% end %>
-  </div>
-</div>
+<%= render 'problems_list' %>
