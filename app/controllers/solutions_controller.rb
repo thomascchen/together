@@ -6,11 +6,28 @@ class SolutionsController < ApplicationController
     @solution.user = current_user
 
     if @solution.save
-      flash[:info] = "Solution saved"
+      flash[:success] = "Solution saved"
       redirect_to problem_path(@problem)
     else
-      flash[:alert] = "Failed to save solution"
+      flash[:error] = "Failed to save solution"
       redirect_to problem_path(@problem)
+    end
+  end
+
+  def edit
+    @solution = Solution.find(params[:id])
+    @problem = @solution.problem
+  end
+
+  def update
+    @solution = Solution.find(params[:id])
+    @problem = @solution.problem
+    if @solution.update(solution_params)
+      flash[:success] = "Solution updated"
+      redirect_to problem_path(@problem)
+    else
+      flash[:error] = "Failed to save solution"
+      render :edit
     end
   end
 
