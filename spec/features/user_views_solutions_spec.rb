@@ -8,7 +8,7 @@ feature 'user views solutions', %{
 
   # Acceptance Criteria
   # [x] User can view a list of solutions for an unsolved problem
-  # [x User can view a list of solutions for a solved problem
+  # [x] User can view a list of solutions for a solved problem
   # [x] Solutions should indicate if they have been accepted
   # [x] User must be authenticated to view solutions
   # [x] Solutions should have title, description, author, time created, and
@@ -66,7 +66,9 @@ feature 'user views solutions', %{
     expect(page).to have_content(proposed_solution.title)
     expect(page).to have_content(proposed_solution.description)
     expect(page).to have_content(proposed_solution.user.name)
-    expect(page).to have_content(proposed_solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p"))
+    expect(page).to have_content(
+      proposed_solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p")
+    )
     expect(page).to_not have_content(accepted_solution.title)
   end
 
@@ -78,7 +80,9 @@ feature 'user views solutions', %{
     expect(page).to have_content(accepted_solution.title)
     expect(page).to have_content(accepted_solution.description)
     expect(page).to have_content(accepted_solution.user.name)
-    expect(page).to have_content(accepted_solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p"))
+    expect(page).to have_content(
+      accepted_solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p")
+    )
     expect(page).to have_content("Accepted")
     expect(page).to_not have_content(proposed_solution.title)
   end
