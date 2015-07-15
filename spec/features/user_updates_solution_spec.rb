@@ -7,13 +7,13 @@ feature 'user updates solution', %{
 } do
 
   # Acceptance Criteria
-  # [ ] User can update a solution they created
-  # [ ] User can't update a solution they didn't create
-  # [ ] When user visits update solution page, they are shown a form that is
+  # [x] User can update a solution they created
+  # [x] User can't update a solution they didn't create
+  # [x] When user visits update solution page, they are shown a form that is
   #     filled out with existing information that they can update and resubmit
-  # [ ] When user submits updated solution, they are taken to the problem show
+  # [x] When user submits updated solution, they are taken to the problem show
   #     page and given a success message
-  # [ ] If user submits invalid information, form is re-rendered and they are
+  # [x] If user submits invalid information, form is re-rendered and they are
   #     given error message.
 
   let!(:category) { Category.create(name: "Heat and Essential") }
@@ -75,6 +75,8 @@ feature 'user updates solution', %{
   scenario 'unauthenticated user cannot update solution' do
     visit problem_path(problem)
 
-    expect(page).to_not have_link('Edit', href: edit_problem_solution_path(problem, solution))
+    expect(page).to_not have_link(
+      'Edit', href: edit_problem_solution_path(problem, solution)
+    )
   end
 end
