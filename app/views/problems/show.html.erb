@@ -45,31 +45,7 @@
       <li class="accordion-navigation">
         <a href="#panel1a">Submit Solution</a>
         <div id="panel1a" class="content">
-
-          <!-- <div class="row">
-            <div class="medium-10 small-centered columns end"> -->
-              <div class="card">
-                <div class="content">
-                  <span class="title">Submit Solution</span>
-                  <%= form_for [@problem, @solution] do |f| %>
-                    <div class="text-field-error">
-                      <%= f.label :title %>
-                      <%= f.text_field :title, autofocus: true %>
-                    </div>
-                    <div class="text-field-error">
-                      <%= f.label :description %>
-                      <%= f.text_area :description %>
-                    </div>
-                    <div>
-                      <%= f.submit "Submit", class: "button radius", "aria-label" => "submit form" %>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-              <br />
-            <!-- </div>
-          </div> -->
-
+          <%= render partial: 'solutions/form' %>
         </div>
       </li>
     </ul>
@@ -90,7 +66,12 @@
             <p><%= solution.description %></p>
           </div>
           <div class="action">
-            <span class="left">Submitted by <%= link_to solution.user.name, user_path(solution.user) %></span>
+            <span class="left">
+              Submitted by <%= link_to solution.user.name, user_path(solution.user) %>
+              <% if current_user == solution.user %>
+                <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <a href="#" data-reveal-id="deleteModal">Delete</a>
+              <% end %>
+            </span>
             <span class="right">Created <%= solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
           <br />
           </div>
