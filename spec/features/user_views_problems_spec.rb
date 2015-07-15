@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'user views unsolved problems', %{
-  As a user,
+  As an authenticated user,
   I can view a list of problems,
   So I can learn about solved and unsolved problems in my building.
 } do
@@ -13,12 +13,13 @@ feature 'user views unsolved problems', %{
   #     last updated time should be displayed alongside each problem
   # [x] User can click in to problem show page and see all of the same
   #     information for each problem
-  # [ ] User can visit click a link to view a list of solved problems
 
-  let!(:category) { Category.create(name: "Heat and Essential") }
-  let!(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
-  let!(:status) { Status.create(id: 1, name: "Open") }
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:category) { Category.create(name: "Heat and Essential") }
+  let(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
+  let(:urgency_level2) { UrgencyLevel.create(id: 3, name: "Not Urgent") }
+  let(:status) { Status.create(id: 1, name: "Open") }
+  let(:status2) { Status.create(id: 2, name: "Solved") }
+  let(:user) { FactoryGirl.create(:user) }
   let!(:problem) do
     FactoryGirl.create(
       :problem,
@@ -28,7 +29,7 @@ feature 'user views unsolved problems', %{
       status: status
     )
   end
-  let!(:status2) { Status.create(id: 2, name: "Solved") }
+
   let!(:solved_problem) do FactoryGirl.create(
       :problem,
       user: user,
@@ -37,7 +38,6 @@ feature 'user views unsolved problems', %{
       status: status2
     )
   end
-  let!(:urgency_level2) { UrgencyLevel.create(id: 3, name: "Not Urgent") }
 
   scenario 'user views list of unsolved problems' do
     open_problem2 = FactoryGirl.create(

@@ -15,7 +15,7 @@ feature 'user creates a new problem', %{
   #     and the form is re-rendered with previously entered information
   # [x] User must be authenticated to post a new problem
 
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
   let!(:category) { Category.create(name: 'Heat and Essential') }
   let!(:urgency_level) { UrgencyLevel.create(name: 'Immediate') }
   let!(:status) { Status.create(id: 1, name: 'Open') }
