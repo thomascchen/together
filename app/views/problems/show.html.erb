@@ -1,6 +1,21 @@
-<br />
-<br />
-<div class="row">
+<% if user_signed_in? %>
+  <div>
+    <% if @solution.errors.any? %>
+      <div>
+        <h2>
+          Please fix
+          <%= pluralize(@solution.errors.count, "error") %>:
+        </h2>
+        <p>
+          <% @solution.errors.full_messages.each do |msg| %>
+            <%= msg %><br>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+  <br />
+  <br />
+  <div class="row">
     <div class="card">
       <div class="content">
         <span class="title"><%= @problem.title %></span>
@@ -20,18 +35,74 @@
           <% end %>
         </span>
         <span class="right">
-          Last updated at <%= @problem.updated_at.to_formatted_s(:long_ordinal) %>
+          Updated <%= @problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %>
         </span>
       <br />
       </div>
     </div>
     <br />
-  </div>
-</div>
 
-<div id="deleteModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Are you sure?</h2><br />
-  <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
-  <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete, class: "button radius", id: "delete-modal-button" %>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
+    <ul class="accordion" data-accordion>
+      <li class="accordion-navigation">
+        <a href="#panel1a">Submit Solution</a>
+        <div id="panel1a" class="content">
+
+          <!-- <div class="row">
+            <div class="medium-10 small-centered columns end"> -->
+              <div class="card">
+                <div class="content">
+                  <span class="title">Submit Solution</span>
+                  <%= form_for [@problem, @solution] do |f| %>
+                    <div class="text-field-error">
+                      <%= f.label :title %>
+                      <%= f.text_field :title, autofocus: true %>
+                    </div>
+                    <div class="text-field-error">
+                      <%= f.label :description %>
+                      <%= f.text_area :description %>
+                    </div>
+                    <div>
+                      <%= f.submit "Submit", class: "button radius", "aria-label" => "submit form" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <br />
+            <!-- </div>
+          </div> -->
+
+        </div>
+      </li>
+    </ul>
+
+  <br \>
+
+    <div class="row">
+      <div class="medium-12 columns end">
+        <% @solutions.each do |solution| %>
+        <div class="card">
+          <div class="content">
+            <span class="title"><%= solution.title %></span>
+            <p><%= solution.description %></p>
+          </div>
+          <div class="action">
+            <span class="left">Submitted by <%= link_to solution.user.name, user_path(solution.user) %></span>
+            <span class="right">Created <%= solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
+          <br />
+          </div>
+        </div>
+        <br />
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="deleteModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle">Are you sure?</h2><br />
+    <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
+    <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete, class: "button radius", id: "delete-modal-button" %>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+
+<% end %>

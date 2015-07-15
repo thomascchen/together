@@ -34,5 +34,6 @@ RSpec.describe Problem, type: :model do
     it { should belong_to(:status) }
     it { should belong_to(:urgency_level) }
     it { should belong_to(:category) }
+    it { should have_many(:solutions) }
   end
 end

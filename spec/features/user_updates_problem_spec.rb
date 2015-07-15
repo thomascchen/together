@@ -68,7 +68,7 @@ feature 'user updates problem', %{
 
   scenario 'unauthenticated user cannot update problem' do
     visit problem_path(problem)
-    expect(page).to_not have_content('Update')
+    expect(page).to_not have_link('Update')
 
     visit edit_user_problem_path(user, problem)
     expect(page).to_not have_selector('form')

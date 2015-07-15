@@ -56,7 +56,7 @@ feature 'user views unsolved problems', %{
     expect(page).to have_content(problem.status.name)
     expect(page).to have_content(problem.user.name)
     expect(page).to have_content(
-      problem.updated_at.to_formatted_s(:long_ordinal)
+      problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p")
     )
     expect(page).to have_content(open_problem2.title)
     expect(page).to_not have_content(solved_problem.title)
@@ -71,7 +71,7 @@ feature 'user views unsolved problems', %{
   end
 
   scenario 'user views problem show page' do
-    visit root_path
+    sign_in(FactoryGirl.create(:user))
     click_on problem.title
 
     expect(page).to have_content(problem.title)
@@ -81,7 +81,7 @@ feature 'user views unsolved problems', %{
     expect(page).to have_content(problem.status.name)
     expect(page).to have_content(problem.user.name)
     expect(page).to have_content(
-      problem.updated_at.to_formatted_s(:long_ordinal)
+      problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p")
     )
   end
 
@@ -103,7 +103,7 @@ feature 'user views unsolved problems', %{
     expect(page).to have_content(solved_problem.status.name)
     expect(page).to have_content(solved_problem.user.name)
     expect(page).to have_content(
-      solved_problem.updated_at.to_formatted_s(:long_ordinal)
+      solved_problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p")
     )
     expect(page).to have_content(solved_problem_2.title)
     expect(page).to_not have_content(problem.title)

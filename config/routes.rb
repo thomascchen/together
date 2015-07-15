@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :problems, except: [:index, :show]
   end
 
-  resources :problems, only: [:index, :show]
+  resources :problems, only: [:index, :show] do
+    resources :solutions, except: [:show]
+  end
 
   resources :categories, only: :show
 

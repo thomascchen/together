@@ -47,6 +47,7 @@ RSpec.describe User, type: :model do
     it { should belong_to(:neighborhood) }
     it { should belong_to(:building) }
     it { should have_many(:problems) }
+    it { should have_many(:solutions) }
   end
 
   describe '#name' do

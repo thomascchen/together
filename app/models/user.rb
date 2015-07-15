@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   belongs_to :neighborhood
   belongs_to :building
   has_many :problems
+  has_many :solutions
 
   validates :first_name, presence: true
   validates :last_name, presence: true
