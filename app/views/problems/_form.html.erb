@@ -1,4 +1,4 @@
-<!-- <div id="SiteWrapper">
+<div>
   <% if @problem.errors.any? %>
     <div>
       <h2>
@@ -12,61 +12,45 @@
       </p>
     </div>
   <% end %>
-    <div id="SearchContainer">
-        <%= form_for [@user, @problem] do |f| %>
-            <div class="group">
-              <%= f.text_field :title, id: "Title", required: true %>
-              <span class="highlight"></span>
-              <span class="bar"></span>
+
+  <br \>
+  <br \>
+
+  <div class="row">
+    <div class="medium-10 small-centered columns end">
+      <div class="card">
+        <div class="content">
+          <span class="title">What is the Problem?</span>
+          <%= form_for [@user, @problem] do |f| %>
+            <div class="text-field-error">
               <%= f.label :title %>
+              <%= f.text_field :title, autofocus: true, required: true %>
             </div>
-            <div class="group">
-              <%= f.text_field :description, id: "Description", required: true %>
-              <span class="highlight"></span>
-              <span class="bar"></span>
+            <div class="text-field-error">
               <%= f.label :description %>
+              <%= f.text_area :description, required: true %>
             </div>
-            <div>
-              Choose a category
+            <div class="radio-error">
+              Choose a category<br \>
               <% @categories.each do |category| %>
-            <ul class="button-group toggle" data-toggle="buttons-radio">
-              <li>
-                <%= f.radio_button(:category_id, category.id, { name: "r-group", "data-toggle" => "button" } )%>
-                <%= f.label(:category_id, category.name, { class: "button", for: "problem_category_id_#{category.id}" } ) %>
-              </li>
-            </ul>
-              <% end %>
-            </div> -->
-
-              <!-- <li>
-                <input type="radio" id="r2" name="r-group" data-toggle="button">
-                <label class="button" for="r2">Middle</label>
-              </li>
-              <li>
-                <input type="radio" id="r3" name="r-group" data-toggle="button">
-                <label class="button" for="r3">Right</label>
-              </li>
-            </ul>
-
-
-            <div>
-              Choose a category
-              <% @categories.each do |category| %>
-                <%= f.radio_button(:category_id, category.id) %>
-                <%= f.label(:category_id, category.name) %>
+                <%= f.radio_button(:category_id, category.id, class: "radio-error") %>
+                <%= f.label(:category_id, category.name, class: "radio-error") %>
               <% end %>
             </div>
-            <div>
-              How urgent is this?
+            <div class="radio-error">
+              How urgent is this?<br \>
               <% @urgency_levels.each do |urgency_level| %>
-                <%= f.radio_button(:urgency_level_id, urgency_level.id) %>
-                <%= f.label(:urgency_level_id, urgency_level.name) %>
+                <%= f.radio_button(:urgency_level_id, urgency_level.id, class: "radio-error") %>
+                <%= f.label(:urgency_level_id, urgency_level.name, class: "radio-error") %>
               <% end %>
             </div>
             <div>
-              <%= f.submit "Submit" %>
+              <%= f.submit "Submit", class: "button radius", "aria-label" => "submit form" %>
             </div>
-            <button type="submit" id="Send">Send Message</button>
-        <% end %>
+          <% end %>
+        </div>
+      </div>
+      <br />
     </div>
+  </div>
 </div>
