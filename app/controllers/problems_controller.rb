@@ -9,6 +9,8 @@ class ProblemsController < ApplicationController
 
   def show
     @problem = Problem.find(params[:id])
+    @solution = Solution.new
+    @solutions = @problem.solutions.order(created_at: :desc)
   end
 
   def new

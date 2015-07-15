@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :problems, except: [:index, :show]
   end
 
-  resources :problems, only: [:index, :show]
+  resources :problems, only: [:index, :show] do
+    resources :solutions, except: [:show]
+  end
 
   resources :categories, only: :show
 
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
   namespace :solved do
     resources :problems, only: [:index]
   end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,6 +3,7 @@ class Problem < ActiveRecord::Base
   belongs_to :status
   belongs_to :urgency_level
   belongs_to :category
+  has_many :solutions
 
   validates :title, presence: true
   validates :description, presence: true
