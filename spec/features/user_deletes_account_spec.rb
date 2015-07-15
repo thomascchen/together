@@ -13,8 +13,7 @@ feature 'user signs in', %{
   #     will also be deleted
 
   scenario 'authenticated user deletes account' do
-    user = FactoryGirl.create(:user)
-    sign_in(user)
+    sign_in(FactoryGirl.create(:user))
     visit root_path
     click_link 'Account'
     click_button 'Delete My Account'

@@ -1,59 +1,12 @@
 <% if user_signed_in? %>
-  <!-- <h1>Submit a Problem</h1> -->
-  <div>
-    <% if @problem.errors.any? %>
+  <div class="row">
+    <div class="large-12 columns">
       <div>
-        <h2>
-          Please fix
-          <%= pluralize(@problem.errors.count, "error") %>:
-        </h2>
-        <p>
-          <% @problem.errors.full_messages.each do |msg| %>
-            <%= msg %><br>
-          <% end %>
-        </p>
-      </div>
-    <% end %>
-
-    <br \>
-    <br \>
-
-    <div class="row">
-      <div class="medium-10 small-centered columns end">
-        <div class="card">
-          <div class="content">
-            <span class="title">Edit a Problem</span>
-            <%= form_for [@user, @problem] do |f| %>
-              <div class="text-field-error">
-                <%= f.label :title %>
-                <%= f.text_field :title, autofocus: true, required: true %>
-              </div>
-              <div class="text-field-error">
-                <%= f.label :description %>
-                <%= f.text_area :description, required: true %>
-              </div>
-              <div class="radio-error">
-                Choose a category<br \>
-                <% @categories.each do |category| %>
-                  <%= f.radio_button(:category_id, category.id, class: "radio-error") %>
-                  <%= f.label(:category_id, category.name, class: "radio-error") %>
-                <% end %>
-              </div>
-              <div class="radio-error">
-                How urgent is this?<br \>
-                <% @urgency_levels.each do |urgency_level| %>
-                  <%= f.radio_button(:urgency_level_id, urgency_level.id, class: "radio-error") %>
-                  <%= f.label(:urgency_level_id, urgency_level.name, class: "radio-error") %>
-                <% end %>
-              </div>
-              <div>
-                <%= f.submit "Submit", class: "button radius", "aria-label" => "submit form" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <br />
+        <h1>Edit Problem</h1>
       </div>
     </div>
   </div>
+
+  <%= render 'form' %>
+
 <% end %>

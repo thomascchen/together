@@ -28,10 +28,9 @@
       </div>
       <div class="action">
         <span class="left">
+          Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %>
           <% if current_user == @problem.user %>
-            Submitted by <%= link_to "you", user_path(@problem.user) %> <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> <a href="#" data-reveal-id="deleteModal">Delete</a>
-          <% else %>
-            Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %>
+            <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> <a href="#" data-reveal-id="deleteModal">Delete</a>
           <% end %>
         </span>
         <span class="right">
@@ -83,6 +82,11 @@
         <div class="card">
           <div class="content">
             <span class="title"><%= solution.title %></span>
+            <% if solution.accepted == true %>
+              <span class="right">
+                <span class="tags radius success label">Accepted</span>
+              </span>
+            <% end %>
             <p><%= solution.description %></p>
           </div>
           <div class="action">

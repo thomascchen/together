@@ -15,10 +15,10 @@ feature 'user deletes a problem', %{
   # [ ] When a user deletes a problem, associated solutions and votes are also
   #     deleted
 
-  let!(:category) { Category.create(name: "Heat and Essential") }
-  let!(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
-  let!(:status) { Status.create(id: 1, name: "Open") }
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:category) { Category.create(name: "Heat and Essential") }
+  let(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
+  let(:status) { Status.create(id: 1, name: "Open") }
+  let(:user) { FactoryGirl.create(:user) }
   let!(:problem) do
     FactoryGirl.create(
       :problem,

@@ -19,7 +19,7 @@ feature 'user updates problem', %{
   let!(:category) { Category.create(name: "Heat and Essential") }
   let!(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
   let!(:status) { Status.create(id: 1, name: "Open") }
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
   let!(:problem) do
     FactoryGirl.create(
       :problem,

@@ -14,7 +14,7 @@ feature 'user creates a new solution', %{
   # [x] User must be authenticated to post a new solution
   # [x] User can submit a solution to their own problem
 
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
   let!(:problem) do
     FactoryGirl.create(
       :problem,
