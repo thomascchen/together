@@ -69,7 +69,7 @@
             <span class="left">
               Submitted by <%= link_to solution.user.name, user_path(solution.user) %>
               <% if current_user == solution.user %>
-                <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <a href="#" data-reveal-id="deleteModal">Delete</a>
+                <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <%= link_to "Delete", problem_solution_path(@problem, solution), method: :delete %></a>
               <% end %>
             </span>
             <span class="right">Created <%= solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>

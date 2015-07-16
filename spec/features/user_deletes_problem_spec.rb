@@ -52,6 +52,7 @@ feature 'user deletes a problem', %{
     expect(page).to_not have_link("Delete", href: '#')
   end
 
-  pending 'associations solutions and votes deleted when problem is deleted'
+  pending 'associations solutions, comments, and votes deleted when
+    problem is deleted'
 
 end

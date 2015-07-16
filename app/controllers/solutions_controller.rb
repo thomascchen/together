@@ -31,8 +31,15 @@ class SolutionsController < ApplicationController
     end
   end
 
-  def format_datetime(time)
-    time.strftime("%B %e, %Y at %l:%M:%S %p")
+  def destroy
+    @solution = Solution.find(params[:id])
+    @problem = @solution.problem
+    if @solution.destroy
+      flash[:success] = "Solution deleted"
+    else
+      flash[:error] = "Solution not deleted"
+    end
+    redirect_to problem_path(@problem)
   end
 
   private
