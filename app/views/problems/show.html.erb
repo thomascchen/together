@@ -22,7 +22,7 @@
         <span class="right">
           <span class="tags radius warning label"><%= @problem.category.name %></span>
           <span class="tags radius alert label"><%= @problem.urgency_level.name %></span>
-          <span class="tags radius success label"><%= @problem.status.name %></span>
+          <span class="tags radius success label status-label"><%= @problem.status.name %></span>
         </span>
         <p><%= @problem.description %></p>
       </div>
@@ -59,8 +59,34 @@
           <div class="content">
             <span class="title"><%= solution.title %></span>
             <% if solution.accepted == true %>
-              <span class="right">
                 <span class="tags radius success label">Accepted</span>
+            <% end %>
+            <% if solution.accepted == true && current_user == @problem.user %>
+              <span class="right">
+                <%= form_for [@problem, Solution.find(solution.id)] do |f| %>
+                  <%= f.hidden_field :accepted, value: false %>
+                    <div>
+                      <% prefix = "solution[existing_problem_attributes]" %>
+                      <%= fields_for prefix, @problem do |f| %>
+                        <%= f.hidden_field :status_id, value: 1 %>
+                      <% end %>
+                    </div>
+                  <%= f.submit "Unaccept Solution", class: "button tiny radius" %>
+                <% end %>
+              </span>
+            <% end %>
+            <% if !@problem.solutions.where('accepted = true').any? && current_user == @problem.user %>
+              <span class="right">
+                <%= form_for [@problem, Solution.find(solution.id)] do |f| %>
+                  <%= f.hidden_field :accepted, value: true %>
+                    <div>
+                      <% prefix = "solution[existing_problem_attributes]" %>
+                      <%= fields_for prefix, @problem do |f| %>
+                        <%= f.hidden_field :status_id, value: 2 %>
+                      <% end %>
+                    </div>
+                  <%= f.submit "Accept Solution", class: "button tiny radius" %>
+                <% end %>
               </span>
             <% end %>
             <p><%= solution.description %></p>
@@ -80,14 +106,11 @@
         <% end %>
       </div>
     </div>
-
   </div>
-
   <div id="deleteModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <h2 id="modalTitle">Are you sure?</h2><br />
     <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
     <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete, class: "button radius", id: "delete-modal-button" %>
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
   </div>
-
 <% end %>

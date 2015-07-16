@@ -22,7 +22,12 @@ class SolutionsController < ApplicationController
   def update
     @solution = Solution.find(params[:id])
     @problem = @solution.problem
-    if @solution.update(solution_params)
+    if params["solution"]["existing_problem_attributes"]
+      @solution.update(solution_params)
+      @problem.update(status_id: params["solution"]["existing_problem_attributes"]["status_id"].to_i)
+      flash[:success] = "Problem and solution updated"
+      redirect_to problem_path(@problem)
+    elsif @solution.update(solution_params)
       flash[:success] = "Solution updated"
       redirect_to problem_path(@problem)
     else
@@ -50,7 +55,7 @@ class SolutionsController < ApplicationController
       :description,
       :accepted,
       :user_id,
-      :problem_id,
+      :problem_id
     )
   end
 end
