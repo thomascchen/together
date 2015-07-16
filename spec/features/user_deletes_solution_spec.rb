@@ -49,12 +49,16 @@ feature 'user deletes a solution', %{
   scenario "user can't delete problem they didn't create" do
     visit problem_path(problem)
 
-    expect(page).to_not have_link('Delete', href: problem_solution_path(problem, solution))
+    expect(page).to_not have_link(
+      'Delete', href: problem_solution_path(problem, solution)
+    )
 
     sign_in(FactoryGirl.create(:user))
     click_on problem.title
 
-    expect(page).to_not have_link('Delete', href: problem_solution_path(problem, solution))
+    expect(page).to_not have_link(
+      'Delete', href: problem_solution_path(problem, solution)
+    )
   end
 
   pending 'associations votes (and comments?) deleted when problem is deleted'
