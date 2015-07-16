@@ -23,8 +23,11 @@ class SolutionsController < ApplicationController
     @solution = Solution.find(params[:id])
     @problem = @solution.problem
     if params["solution"]["existing_problem_attributes"]
+      num = params["solution"]["existing_problem_attributes"]["status_id"].to_i
       @solution.update(solution_params)
-      @problem.update(status_id: params["solution"]["existing_problem_attributes"]["status_id"].to_i)
+      @problem.update(
+        status_id: num
+      )
       flash[:success] = "Problem and solution updated"
       redirect_to problem_path(@problem)
     elsif @solution.update(solution_params)

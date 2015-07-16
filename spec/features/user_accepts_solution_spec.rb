@@ -75,12 +75,12 @@ feature 'user accepts solution', %{
 
   scenario "authenticated user can't unaccept another user's solution" do
     Solution.create(
-        title: "Accepted solution",
-        description: "This is my accepted solution description",
-        user: user,
-        problem: problem,
-        accepted: true
-      )
+      title: "Accepted solution",
+      description: "This is my accepted solution description",
+      user: user,
+      problem: problem,
+      accepted: true
+    )
     sign_in(FactoryGirl.create(:user))
 
     click_on problem.title
