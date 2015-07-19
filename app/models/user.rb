@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   belongs_to :building
   has_many :problems
   has_many :solutions
+  has_many :problem_votes
 
   validates :first_name, presence: true
   validates :last_name, presence: true
