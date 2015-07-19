@@ -31,32 +31,37 @@ feature 'user upvotes problem', %{
     )
   end
 
-  scenario 'authenticated user upvotes and cancels vote on problem', js: true do
-    sign_in(FactoryGirl.create(:user))
-    click_on "Upvote"
-    visit root_path
+  scenario 'authenticated user upvotes and cancels vote on problem index',
+    js: true do
+      sign_in(FactoryGirl.create(:user))
+      click_on "Upvote"
+      visit root_path
 
-    expect(page).to have_content('Score: 1')
-    expect(page).to_not have_content('Upvote')
+      expect(page).to have_content('Score: 1')
+      expect(page).to_not have_content('Upvote')
 
-    click_on 'Cancel vote'
-    visit root_path
+      visit root_path
+      click_on 'Cancel vote'
 
-    expect(page).to have_content('Score: 0')
-    expect(page).to_not have_link('Cancel vote')
+      expect(page).to have_content('Score: 0')
+      expect(page).to_not have_link('Cancel vote')
+    end
 
-    click_on problem.title
-    click_on 'Upvote'
+  scenario 'authenticated user upvotes and cancels vote on problem show page',
+    js: true do
+      sign_in(FactoryGirl.create(:user))
+      visit problem_path(problem)
+      click_on "Upvote"
 
-    expect(page).to have_content('Score: 1')
-    expect(page).to_not have_content('Upvote')
+      expect(page).to have_content('Score: 1')
+      expect(page).to_not have_content('Upvote')
 
-    visit problem_path(problem)
-    click_on 'Cancel vote'
+      visit problem_path(problem)
+      click_on 'Cancel vote'
 
-    expect(page).to have_content('Score: 0')
-    expect(page).to_not have_link('Cancel vote')
-  end
+      expect(page).to have_content('Score: 0')
+      expect(page).to_not have_link('Cancel vote')
+    end
 
   scenario 'authenticated user cannot vote on own problem' do
     sign_in(user)

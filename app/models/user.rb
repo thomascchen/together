@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :problems
   has_many :solutions
   has_many :problem_votes
+  has_many :solution_votes
 
   validates :first_name, presence: true
   validates :last_name, presence: true

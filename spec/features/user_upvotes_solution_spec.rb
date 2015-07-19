@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user upvotes problem', %{
+feature 'user upvotes solution', %{
   As an authorized user,
   I can upvote a solution,
   So I can let people know that I think it’s a good solution.
@@ -20,7 +20,7 @@ feature 'user upvotes problem', %{
   let(:open_status) { Status.create(id: 1, name: "Open") }
   let!(:solved_status) { Status.create(id: 2, name: "Solved") }
   let(:user) { FactoryGirl.create(:user) }
-  let!(:problem) do
+  let!(:open_problem) do
     FactoryGirl.create(
       :problem,
       user: user,
@@ -60,62 +60,63 @@ feature 'user upvotes problem', %{
     )
   end
 
-  scenario 'authenticated user upvotes and cancels vote on problem', js: true do
+  scenario 'authenticated user upvotes and cancels vote on solution' do
     sign_in(FactoryGirl.create(:user))
-    click_on "Upvote"
-    visit root_path
-
+    click_on open_problem.title
+    # within(:xpath, '//div[@class="solution-vote-container"]') do
+    click_on('Upvote Solution')
+    # end
+    visit problem_path(open_problem)
     expect(page).to have_content('Score: 1')
-    expect(page).to_not have_content('Upvote')
+    # expect(page.has_xpath?('.//a', text: 'Upvote', count: 1))
 
-    click_on 'Cancel vote'
-    visit root_path
 
-    expect(page).to have_content('Score: 0')
-    expect(page).to_not have_link('Cancel vote')
+    # visit problem_path(open_problem)
+    #
+    # expect(page).to have_content('Score: 1')
 
-    click_on problem.title
-    click_on 'Upvote'
+    # within(:xpath, '//div[@class="solution-vote-container"]') do
+      # click_on('Cancel Solution vote')
+    # end
 
-    expect(page).to have_content('Score: 1')
-    expect(page).to_not have_content('Upvote')
+    # expect(page).to have_content('Score: 0')
+    # expect(page.has_xpath?('.//a', text: 'Cancel Upvote', count: 1))
 
-    visit problem_path(problem)
-    click_on 'Cancel vote'
+    # visit problem_path(open_problem)
 
-    expect(page).to have_content('Score: 0')
-    expect(page).to_not have_link('Cancel vote')
+    # expect(page).to have_content('Score: 0')
+    # expect(page.has_xpath?('.//a', text: 'Upvote', count: 2))
   end
 
-  scenario 'authenticated user cannot vote on own problem' do
-    sign_in(user)
-
-    expect(page).to_not have_link('Upvote')
-  end
-
-  scenario 'unauthenticated user cannot vote on problem' do
-    visit root_path
-
-    expect(page).to_not have_link('Upvote')
-  end
-
-  scenario 'authenticated user cannot vote on solved problems' do
-    solved_problem = FactoryGirl.create(
-      :problem,
-      user: user,
-      category: category,
-      urgency_level: urgency_level,
-      status: solved_status
-    )
-
-    sign_in(FactoryGirl.create(:user))
-    click_on 'Solved Problems'
-
-    expect(page).to_not have_link('Upvote')
-
-    click_on solved_problem.title
-
-    expect(page).to_not have_link('Upvote')
-  end
+  # scenario 'authenticated user cannot vote on own problem' do
+  #   sign_in(user)
+  #
+  #   expect(page).to_not have_link('Upvote')
+  # end
+  #
+  # scenario 'unauthenticated user cannot vote on problem' do
+  #   visit root_path
+  #
+  #   expect(page).to_not have_link('Upvote')
+  # end
+  #
+  # scenario 'authenticated user cannot vote on solved problems' do
+  #   solved_problem = FactoryGirl.create(
+  #     :problem,
+  #     user: user,
+  #     category: category,
+  #     urgency_level: urgency_level,
+  #     status: solved_status
+  #   )
+  #
+  #   sign_in(FactoryGirl.create(:user))
+  #   click_on 'Solved Problems'
+  #
+  #   expect(page).to_not have_link('Upvote')
+  #
+  #   click_on solved_problem.title
+  #
+  #   expect(page).to_not have_link('Upvote')
+  # end
 
 end
