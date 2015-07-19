@@ -13,19 +13,19 @@
             <% end %>
           </span>
         </p>
-          <% unless Problem.find_by(id: problem.id, user: current_user) %>
-            <div class="vote-container">
-              <% if ProblemVote.where(user: current_user, problem: problem) == [] %>
-                <span class="upvote">
-                  <%= link_to 'Upvote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "upvote-#{problem.id}" %>
-                </span>
-              <% elsif ProblemVote.find_by(user: current_user, problem: problem) != nil %>
-                <span class="cancel-vote" >
-                  <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem.id }, class: "cancel-vote-#{problem.id}" %>
-                </span>
-              <% end %>
-            </div>
-          <% end %>
+        <% unless Problem.find_by(id: problem.id, user: current_user) || problem.status_id == 2 %>
+          <div class="vote-container">
+            <% if ProblemVote.where(user: current_user, problem: problem) == [] %>
+              <span class="upvote">
+                <%= link_to 'Upvote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "upvote-#{problem.id}" %>
+              </span>
+            <% elsif ProblemVote.find_by(user: current_user, problem: problem) != nil %>
+              <span class="cancel-vote" >
+                <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
+              </span>
+            <% end %>
+          </div>
+        <% end %>
       </span>
       <div class="card">
         <div class="content">
