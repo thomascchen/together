@@ -10,20 +10,10 @@
               <span class="upvote">
                 <%= link_to 'Upvote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "upvote-#{problem.id}" %>
               </span>
-              <% if ProblemVote.find_by(user: current_user, problem: problem) != nil %>
-                <span class="cancel-vote hidden" >
-                  <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
-                </span>
-              <% end %>
-            <% else %>
-              <span class="upvote hidden">
-                <%= link_to 'Upvote', 'javascript:void(0)', method: :post, data: { user_id: current_user.id, problem_id: problem.id, vote_count: ProblemVote.all.last.id }, class: "upvote-#{problem.id}" %>
+            <% elsif ProblemVote.find_by(user: current_user, problem: problem) != nil %>
+              <span class="cancel-vote" >
+                <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
               </span>
-              <% if ProblemVote.find_by(user: current_user, problem: problem) != nil %>
-                <span class="cancel-vote" >
-                  <%= link_to 'Cancel vote', 'javascript:void(0)', method: :delete, data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
-                </span>
-              <% end %>
             <% end %>
           </div>
       </span>
