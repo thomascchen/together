@@ -10,8 +10,10 @@ class ProblemVotesController < ApplicationController
 
   def destroy
     @problem = Problem.find(params[:problem_id])
-    @vote = ProblemVote.find(params[:vote_id])
-    @vote.destroy
+    if params[:vote_id]
+      @vote = ProblemVote.find(params[:vote_id])
+      @vote.destroy
+    end
 
     respond_to do |format|
       format.json { render json: @vote }

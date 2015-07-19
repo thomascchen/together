@@ -7,11 +7,11 @@ feature 'user upvotes problem', %{
 } do
 
   # Acceptance Criteria:
-  # [ ] User can upvote a problem they think is especially important
-  # [ ] User can remove upvote on a problem if they change their mind
-  # [ ] User cannot upvote on their own problem
-  # [ ] User can only upvote once per problem
-  # [ ] User must be authenticated to vote
+  # [x] User can upvote a problem they think is especially important
+  # [x] User can remove upvote on a problem if they change their mind
+  # [x] User cannot upvote on their own problem
+  # [x] User can only upvote once per problem
+  # [x] User must be authenticated to vote
 
   let(:category) { Category.create(name: "Heat and Essential") }
   let(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
@@ -28,17 +28,33 @@ feature 'user upvotes problem', %{
     )
   end
 
-  scenario 'authenticated user upvotes problem' do
-    sign_in(user)
-    
+  scenario 'authenticated user upvotes and cancels vote on problem', js: true do
+    sign_in(FactoryGirl.create(:user))
+
     click_on "Upvote"
 
+    visit root_path
     expect(page).to have_content('Score: 1')
-    expect(page).to have_content('Cancel upvote')
     expect(page).to_not have_content('Upvote')
+
+    click_on 'Cancel vote'
+
+    visit root_path
+
+    expect(page).to have_content('Score: 0')
+    expect(page).to_not have_link('Cancel vote')
   end
 
-  pending 'authenticated user removes upvote on problem'
-  pending 'unauthenticated user cannot vote on problem'
+  scenario 'authenticated user cannot vote on own problem' do
+    sign_in(user)
+
+    expect(page).to_not have_link('Upvote')
+  end
+
+  scenario 'unauthenticated user cannot vote on problem' do
+    visit root_path
+
+    expect(page).to_not have_link('Upvote')
+  end
 
 end

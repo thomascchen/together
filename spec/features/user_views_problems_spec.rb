@@ -14,12 +14,12 @@ feature 'user views unsolved problems', %{
   # [x] User can click in to problem show page and see all of the same
   #     information for each problem
 
-  let(:category) { Category.create(name: "Heat and Essential") }
-  let(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
-  let(:urgency_level2) { UrgencyLevel.create(id: 3, name: "Not Urgent") }
-  let(:status) { Status.create(id: 1, name: "Open") }
-  let(:status2) { Status.create(id: 2, name: "Solved") }
-  let(:user) { FactoryGirl.create(:user) }
+  let!(:category) { Category.create(name: "Heat and Essential") }
+  let!(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
+  let!(:urgency_level2) { UrgencyLevel.create(id: 3, name: "Not Urgent") }
+  let!(:status) { Status.create(id: 1, name: "Open") }
+  let!(:status2) { Status.create(id: 2, name: "Solved") }
+  let!(:user) { FactoryGirl.create(:user) }
   let!(:problem) do
     FactoryGirl.create(
       :problem,
@@ -71,7 +71,7 @@ feature 'user views unsolved problems', %{
   end
 
   scenario 'user views problem show page' do
-    sign_in(FactoryGirl.create(:user))
+    sign_in(user)
     click_on problem.title
 
     expect(page).to have_content(problem.title)
@@ -94,7 +94,7 @@ feature 'user views unsolved problems', %{
       status: status2
     )
     sign_in(user)
-    visit root_path
+
     click_on 'Solved Problems'
 
     expect(page).to have_content(solved_problem.title)

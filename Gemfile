@@ -37,6 +37,7 @@ group :test do
   gem "codeclimate-test-reporter", require: nil
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
 end
 
 group :development, :test do
