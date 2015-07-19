@@ -21,7 +21,7 @@
                 </span>
               <% elsif ProblemVote.find_by(user: current_user, problem: problem) != nil %>
                 <span class="cancel-vote" >
-                  <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
+                  <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem.id }, class: "cancel-vote-#{problem.id}" %>
                 </span>
               <% end %>
             </div>
