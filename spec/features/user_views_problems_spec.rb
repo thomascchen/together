@@ -48,7 +48,7 @@ feature 'user views unsolved problems', %{
       status: status
     )
 
-    visit root_path
+    sign_in(user)
 
     expect(page).to have_content(problem.title)
     expect(page).to have_content(problem.category.name)

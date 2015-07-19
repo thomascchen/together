@@ -41,11 +41,6 @@ feature 'user deletes a problem', %{
 
   scenario "user can't delete problem they didn't create" do
     user2 = FactoryGirl.create(:user)
-    visit root_path
-
-    click_on problem.title
-    expect(page).to_not have_link("Delete", href: '#')
-
     sign_in(user2)
     click_on problem.title
 

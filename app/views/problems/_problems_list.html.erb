@@ -1,23 +1,50 @@
 <div class="row">
   <div class="medium-12 columns end main">
-    <% @problems.each do |problem| %>
-    <div class="card">
-      <div class="content">
-        <span class="title"><%= link_to problem.title, problem_path(problem) %></span>
-        <span class="right">
-          <span class="tags radius warning label"><%= problem.category.name %></span>
-          <span class="tags radius alert label"><%= problem.urgency_level.name %></span>
-          <span class="tags radius success label"><%= problem.status.name %></span>
-        </span>
-        <p>Two roads diverged in a yellow wood,	 And sorry I could not travel both	 And be one traveler, long I stood	 And looked down one as far as I could	. To where it bent in the undergrowth;</p>
+    <% if user_signed_in? && @problems %>
+      <% @problems.each do |problem| %>
+      <span class="vote left">
+
+        <p>Score: <span class="vote-score-<%= problem.id %>"><%= ProblemVote.where(problem: problem).count %></span></p>
+            <div class="vote-container">
+            <% if ProblemVote.where(user: current_user, problem: problem) == [] %>
+              <span class="upvote">
+                <%= link_to 'Upvote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "upvote-#{problem.id}" %>
+              </span>
+              <% if ProblemVote.find_by(user: current_user, problem: problem) != nil %>
+                <span class="cancel-vote hidden" >
+                  <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
+                </span>
+              <% end %>
+            <% else %>
+              <span class="upvote hidden">
+                <%= link_to 'Upvote', 'javascript:void(0)', method: :post, data: { user_id: current_user.id, problem_id: problem.id, vote_count: ProblemVote.all.last.id }, class: "upvote-#{problem.id}" %>
+              </span>
+              <% if ProblemVote.find_by(user: current_user, problem: problem) != nil %>
+                <span class="cancel-vote" >
+                  <%= link_to 'Cancel vote', 'javascript:void(0)', method: :delete, data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+      </span>
+      <div class="card">
+        <div class="content">
+          <span class="title"><%= link_to problem.title, problem_path(problem) %></span>
+          <span class="right">
+            <span class="tags radius warning label"><%= problem.category.name %></span>
+            <span class="tags radius alert label"><%= problem.urgency_level.name %></span>
+            <span class="tags radius success label"><%= problem.status.name %></span>
+          </span>
+          <p>Two roads diverged in a yellow wood,	 And sorry I could not travel both	 And be one traveler, long I stood	 And looked down one as far as I could	. To where it bent in the undergrowth;</p>
+        </div>
+        <div class="action">
+          <span class="left">Submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>
+          <span class="right">Updated <%= problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
+        <br />
+        </div>
       </div>
-      <div class="action">
-        <span class="left">Submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>
-        <span class="right">Updated <%= problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
       <br />
-      </div>
-    </div>
-    <br />
+      <% end %>
     <% end %>
   </div>
 </div>
