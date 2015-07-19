@@ -2,10 +2,12 @@ $(".upvote").on("click", "a", function(event) {
   event.preventDefault();
   var userId = $(this).attr("data-user-id");
   var problemId = $(this).attr("data-problem-id");
-  var voteTotal = $(this).closest('.vote').find('.vote-score-' + problemId).text();
-  voteTotal++
-  $(this).closest('.vote').find('.vote-score-' + problemId).text(voteTotal);
-  $(this).closest('.upvote').find('.upvote-' + problemId).hide();
+  var voteTotal = $(this).closest(".vote").find(
+    ".vote-score-" + problemId
+  ).text();
+  voteTotal++;
+  $(this).closest(".vote").find(".vote-score-" + problemId).text(voteTotal);
+  $(this).closest(".upvote").find(".upvote-" + problemId).hide();
   // $(this).closest('.vote').find('.vote-container').append("<span class='cancel-vote'><a data-problem-id=\"" + problemId + "\" data-vote-id=\"" + problemId + "\" class=\"cancel-vote-" + problemId +"\" href=\"javascript:void(0)\">Cancel vote</a></span>");
 
   $.ajax({
@@ -24,10 +26,12 @@ $(".cancel-vote").on("click", "a", function(event) {
   event.preventDefault();
   var voteId = $(this).attr("data-vote-id");
   var problemId = $(this).attr("data-problem-id");
-  var voteTotal = $(this).closest('.vote').find('.vote-score-' + problemId).text();
-  voteTotal--
-  $(this).closest('.vote').find('.vote-score-' + problemId).text(voteTotal);
-  $(this).closest('.vote').find('.cancel-vote').hide();
+  var voteTotal = $(this).closest(".vote").find(
+    ".vote-score-" + problemId
+  ).text();
+  voteTotal--;
+  $(this).closest(".vote").find(".vote-score-" + problemId).text(voteTotal);
+  $(this).closest(".vote").find(".cancel-vote").hide();
 
   $.ajax({
     type: "DELETE",
