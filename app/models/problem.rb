@@ -3,8 +3,8 @@ class Problem < ActiveRecord::Base
   belongs_to :status
   belongs_to :urgency_level
   belongs_to :category
-  has_many :solutions
-  has_many :problem_votes
+  has_many :solutions, dependent: :destroy
+  has_many :problem_votes, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true
