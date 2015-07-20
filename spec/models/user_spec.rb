@@ -48,6 +48,8 @@ RSpec.describe User, type: :model do
     it { should belong_to(:building) }
     it { should have_many(:problems) }
     it { should have_many(:solutions) }
+    it { should have_many(:problem_votes) }
+    it { should have_many(:solution_votes) }
   end
 
   describe '#name' do

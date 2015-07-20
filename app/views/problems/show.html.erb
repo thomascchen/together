@@ -16,6 +16,33 @@
   <br />
   <br />
   <div class="row">
+    <span class="vote left">
+      <p>
+        Score:
+        <span class="vote-score-<%= @problem.id %>">
+          <% if ProblemVote.where(problem: @problem).first == nil %>
+            0
+          <% else %>
+            <%= ProblemVote.where(problem: @problem).sum(:vote) %>
+          <% end %>
+        </span>
+      </p>
+      <% unless Problem.find_by(id: @problem.id, user: current_user) || @problem.status_id == 2 %>
+        <div class="problem-vote-container">
+          <% if ProblemVote.where(user: current_user, problem: @problem) == [] || ProblemVote.find_by(user: current_user, problem: @problem, vote: 0) %>
+            <span class="problem-vote">
+              <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id}" %>
+              <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id}", style: "display: none;" %>
+            </span>
+          <% elsif ProblemVote.find_by(user: current_user, problem: @problem, vote: 1) %>
+            <span class="problem-vote" >
+              <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id}" %>
+              <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id}", style: "display: none;" %>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
+    </span>
     <div class="card">
       <div class="content">
         <span class="title"><%= @problem.title %></span>
@@ -55,6 +82,35 @@
     <div class="row">
       <div class="medium-12 columns end">
         <% @solutions.each do |solution| %>
+
+        <span class="vote left">
+          <p>
+            Score:
+            <span class="vote-score-<%= solution.id %>">
+              <% if SolutionVote.where(solution: solution).first == nil %>
+                0
+              <% else %>
+                <%= SolutionVote.where(solution: solution).sum(:vote) %>
+              <% end %>
+            </span>
+          </p>
+          <% unless Solution.find_by(id: solution.id, user: current_user) || solution.problem.status_id == 2 %>
+            <div class="solution-vote-container">
+              <% if SolutionVote.where(user: current_user, solution: solution) == [] || SolutionVote.find_by(user: current_user, solution: solution, vote: 0) %>
+                <span class="solution-vote">
+                  <%= link_to 'Upvote Solution', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-upvote upvote-#{solution.id}" %>
+                  <%= link_to 'Cancel Solution vote', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-cancel-vote cancel-vote-#{solution.id}", style: "display: none;" %>
+                </span>
+              <% elsif SolutionVote.find_by(user: current_user, solution: solution, vote: 1) %>
+                <span class="solution-vote" >
+                  <%= link_to 'Cancel Solution vote', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-cancel-vote cancel-vote-#{solution.id}" %>
+                  <%= link_to 'Upvote Solution', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-upvote upvote-#{solution.id}", style: "display: none;" %>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
+        </span>
+
         <div class="card">
           <div class="content">
             <span class="title"><%= solution.title %></span>

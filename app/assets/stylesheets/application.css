@@ -37,3 +37,8 @@ div.radio-error > div.field_with_errors {
 .text-field-error > div {
   display: block;
 }
+
+.vote {
+  margin-right: 2%;
+  margin-top: 3.5%;
+}

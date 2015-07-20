@@ -40,6 +40,7 @@ feature 'user accepts solution', %{
 
   scenario 'authenticated user accepts and unaccepts solution' do
     sign_in(user)
+
     click_on problem.title
     click_on 'Accept Solution'
 
