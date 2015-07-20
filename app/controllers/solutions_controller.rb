@@ -44,10 +44,11 @@ class SolutionsController < ApplicationController
     @problem = @solution.problem
     if @solution.destroy
       flash[:success] = "Solution deleted"
+      redirect_to problem_path(@problem)
     else
       flash[:error] = "Solution not deleted"
+      render partial: 'problems/show'
     end
-    redirect_to problem_path(@problem)
   end
 
   private

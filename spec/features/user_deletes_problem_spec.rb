@@ -12,6 +12,8 @@ feature 'user deletes a problem', %{
   # [x] User must be authenticated to delete a problem
   # [x] When user deletes problem, they are shown a confirmation modal and then
   #     a success message upon confirmation
+  # [x] When a user deletes a problem, associated solutions and votes are also
+  #     deleted
 
   let(:category) { Category.create(name: "Heat and Essential") }
   let(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
@@ -30,11 +32,11 @@ feature 'user deletes a problem', %{
   scenario 'user deletes problem they created', js: true do
     sign_in(user)
     click_on problem.title
-    click_link 'Delete'
+    click_link 'Delete Problem'
 
     click_link 'Delete', href: user_problem_path(problem.user, problem)
     expect(page).to have_content("Problem deleted")
-    expect(page).to_not have_content("problem.title")
+    expect(page).to_not have_content(problem.title)
   end
 
   scenario "user can't delete problem they didn't create" do
@@ -42,10 +44,6 @@ feature 'user deletes a problem', %{
     sign_in(user2)
     click_on problem.title
 
-    expect(page).to_not have_link("Delete", href: '#')
+    expect(page).to_not have_link("Delete Problem", href: '#')
   end
-
-  pending 'associations solutions, comments, and votes deleted when
-    problem is deleted'
-
 end

@@ -10,9 +10,9 @@ feature 'user deletes a solution', %{
   # [x] User can delete a solution they created
   # [x] User can't delete a solution they didn't create
   # [x] User must be authenticated to delete a solution
-  # [ ] When user deletes solution, they are shown a confirmation modal and then
+  # [x] When user deletes solution, they are shown a confirmation modal and then
   #     a success message upon confirmation
-  # [ ] When a user deletes a solution, associated comments and votes are also
+  # [x] When a user deletes a solution, associated comments and votes are also
   #     deleted
 
   let(:category) { Category.create(name: "Heat and Essential") }
@@ -38,11 +38,14 @@ feature 'user deletes a solution', %{
     )
   end
 
-  scenario 'authenticated user deletes solution' do
+  scenario 'authenticated user deletes solution', js: true do
     sign_in(user)
     click_on problem.title
+    click_link 'Delete Solution'
+
     click_link 'Delete', href: problem_solution_path(problem, solution)
 
+    expect(page).to have_content("Solution deleted")
     expect(page).to_not have_content(solution.title)
   end
 
@@ -50,19 +53,14 @@ feature 'user deletes a solution', %{
     visit problem_path(problem)
 
     expect(page).to_not have_link(
-      'Delete', href: problem_solution_path(problem, solution)
+      'Delete Solution', href: problem_solution_path(problem, solution)
     )
 
     sign_in(FactoryGirl.create(:user))
     click_on problem.title
 
     expect(page).to_not have_link(
-      'Delete', href: problem_solution_path(problem, solution)
+      'Delete Solution', href: problem_solution_path(problem, solution)
     )
   end
-
-  pending 'associations votes (and comments?) deleted when problem is deleted'
-
-  pending 'authenticated user sees modal when deleting solution'
-
 end
