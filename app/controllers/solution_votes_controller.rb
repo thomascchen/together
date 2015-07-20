@@ -1,4 +1,6 @@
 class SolutionVotesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     if params[:solution_id]
       @solution = Solution.find(params[:solution_id])

@@ -16,7 +16,7 @@ feature 'user signs in', %{
     click_link 'Account'
     click_button 'Delete My Account'
 
-    expect(page).to have_content('Bye')
+    expect(page).to have_content('Log in')
   end
 
   scenario 'unauthenticated cannot delete acount' do
