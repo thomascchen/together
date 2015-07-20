@@ -45,6 +45,11 @@
               <% end %>
             </div>
             <div>
+              Upload Picture <br \>
+                <%= f.label :photo, "Upload Picture", style: "display: none;"  %>
+                <%= f.file_field :photo %>
+            </div>
+            <div>
               <%= f.submit "Submit", class: "button radius", "aria-label" => "submit form" %>
             </div>
           <% end %>

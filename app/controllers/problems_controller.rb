@@ -30,7 +30,7 @@ class ProblemsController < ApplicationController
     @urgency_levels = UrgencyLevel.all
     if @problem.save
       flash[:success] = "Problem submitted"
-      redirect_to problems_path
+      redirect_to problem_path(@problem)
     else
       flash.now[:error] = "Problem not saved"
       render :new
@@ -76,7 +76,8 @@ class ProblemsController < ApplicationController
       :status_id,
       :category_id,
       :urgency_level_id,
-      :user_id
+      :user_id,
+      :photo
     )
   end
 end
