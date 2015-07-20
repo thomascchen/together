@@ -9,8 +9,6 @@ feature 'user signs in', %{
   # Acceptance Criteria:
   # [x] If I am an authenticated user, I can delete my account
   # [x] If I am not logged in, I cannot delete my account
-  # [ ] If I delete my account, all associated problems, solutions, and votes
-  #     will also be deleted
 
   scenario 'authenticated user deletes account' do
     sign_in(FactoryGirl.create(:user))
@@ -27,7 +25,4 @@ feature 'user signs in', %{
     expect(page).to_not have_content('Account')
     expect(page).to_not have_content('Sign Out')
   end
-
-  pending 'deleting account deletes associated problems, solutions, votes'
-
 end
