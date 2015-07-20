@@ -21,7 +21,7 @@ feature 'user upvotes problem', %{
   let(:open_status) { Status.create(id: 1, name: "Open") }
   let!(:solved_status) { Status.create(id: 2, name: "Solved") }
   let(:user) { FactoryGirl.create(:user) }
-  let!(:problem) do
+  let!(:open_problem) do
     FactoryGirl.create(
       :problem,
       user: user,
@@ -34,45 +34,45 @@ feature 'user upvotes problem', %{
   scenario 'authenticated user upvotes and cancels vote on problem index',
     js: true do
       sign_in(FactoryGirl.create(:user))
-      click_on "Upvote"
-      visit root_path
+      click_on('Upvote Problem')
 
       expect(page).to have_content('Score: 1')
-      expect(page).to_not have_content('Upvote')
+      expect(page).to_not have_link('Upvote Problem')
 
-      visit root_path
-      click_on 'Cancel vote'
+      click_on('Cancel Problem vote')
 
       expect(page).to have_content('Score: 0')
-      expect(page).to_not have_link('Cancel vote')
+      expect(page).to_not have_content('Score: 1')
+      expect(page).to_not have_link('Cancel Problem vote')
     end
 
   scenario 'authenticated user upvotes and cancels vote on problem show page',
     js: true do
       sign_in(FactoryGirl.create(:user))
-      visit problem_path(problem)
-      click_on "Upvote"
+      visit problem_path(open_problem)
+      click_on "Upvote Problem"
 
       expect(page).to have_content('Score: 1')
-      expect(page).to_not have_content('Upvote')
+      expect(page).to_not have_link('Upvote Problem')
 
-      visit problem_path(problem)
-      click_on 'Cancel vote'
+      click_on 'Cancel Problem vote'
 
       expect(page).to have_content('Score: 0')
-      expect(page).to_not have_link('Cancel vote')
+      expect(page).to_not have_content('Score: 1')
+      expect(page).to_not have_link('Cancel Problem vote')
+      expect(page).to have_link('Upvote Problem')
     end
 
   scenario 'authenticated user cannot vote on own problem' do
     sign_in(user)
 
-    expect(page).to_not have_link('Upvote')
+    expect(page).to_not have_link('Upvote Problem')
   end
 
   scenario 'unauthenticated user cannot vote on problem' do
     visit root_path
 
-    expect(page).to_not have_link('Upvote')
+    expect(page).to_not have_link('Upvote Problem')
   end
 
   scenario 'authenticated user cannot vote on solved problems' do
@@ -87,11 +87,11 @@ feature 'user upvotes problem', %{
     sign_in(FactoryGirl.create(:user))
     click_on 'Solved Problems'
 
-    expect(page).to_not have_link('Upvote')
+    expect(page).to_not have_link('Upvote Problem')
 
     click_on solved_problem.title
 
-    expect(page).to_not have_link('Upvote')
+    expect(page).to_not have_link('Upvote Problem')
   end
 
 end

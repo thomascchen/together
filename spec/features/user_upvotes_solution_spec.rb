@@ -7,13 +7,13 @@ feature 'user upvotes solution', %{
 } do
 
   # Acceptance Criteria:
-  # [ ] User can upvote a solution they think is especially important
-  # [ ] User can remove upvote on a solution if they change their mind
-  # [ ] User cannot upvote on their own solution
-  # [ ] User can only upvote once per solution
-  # [ ] User must be authenticated to vote
-  # [ ] User cannot upvote solutions on solved problems
-  # [ ] Scores for solution votes are displayed on the problem show page.
+  # [x] User can upvote a solution they think is especially important
+  # [x] User can remove upvote on a solution if they change their mind
+  # [x] User cannot upvote on their own solution
+  # [x] User can only upvote once per solution
+  # [x] User must be authenticated to vote
+  # [x] User cannot upvote solutions on solved problems
+  # [x] Scores for solution votes are displayed on the problem show page.
 
   let(:category) { Category.create(name: "Heat and Essential") }
   let(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :problems, only: [:index, :show] do
     resources :solutions, except: [:show]
-    resources :problem_votes, only: [:create, :destroy]
+    resources :problem_votes, only: [:create]
   end
 
   resources :solutions, only: [:show] do

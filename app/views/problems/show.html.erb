@@ -23,19 +23,21 @@
           <% if ProblemVote.where(problem: @problem).first == nil %>
             0
           <% else %>
-            <%= ProblemVote.where(problem: @problem).count %>
+            <%= ProblemVote.where(problem: @problem).sum(:vote) %>
           <% end %>
         </span>
       </p>
       <% unless Problem.find_by(id: @problem.id, user: current_user) || @problem.status_id == 2 %>
-        <div class="vote-container">
-          <% if ProblemVote.where(user: current_user, problem: @problem) == [] %>
-            <span class="upvote">
-              <%= link_to 'Upvote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "upvote-#{@problem.id}" %>
+        <div class="problem-vote-container">
+          <% if ProblemVote.where(user: current_user, problem: @problem) == [] || ProblemVote.find_by(user: current_user, problem: @problem, vote: 0) %>
+            <span class="problem-vote">
+              <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id}" %>
+              <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id}", style: "display: none;" %>
             </span>
-          <% elsif ProblemVote.find_by(user: current_user, problem: @problem) != nil %>
-            <span class="cancel-vote" >
-              <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: @problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: @problem).id }, class: "cancel-vote-#{@problem.id}" %>
+          <% elsif ProblemVote.find_by(user: current_user, problem: @problem, vote: 1) %>
+            <span class="problem-vote" >
+              <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id}" %>
+              <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id}", style: "display: none;" %>
             </span>
           <% end %>
         </div>

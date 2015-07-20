@@ -2,6 +2,7 @@
   <div class="medium-12 columns end main">
     <% if user_signed_in? && @problems %>
       <% @problems.each do |problem| %>
+
       <span class="vote left">
         <p>
           Score:
@@ -9,24 +10,27 @@
             <% if ProblemVote.where(problem: problem).first == nil %>
               0
             <% else %>
-              <%= ProblemVote.where(problem: problem).count %>
+              <%= ProblemVote.where(problem: problem).sum(:vote) %>
             <% end %>
           </span>
         </p>
         <% unless Problem.find_by(id: problem.id, user: current_user) || problem.status_id == 2 %>
-          <div class="vote-container">
-            <% if ProblemVote.where(user: current_user, problem: problem) == [] %>
-              <span class="upvote">
-                <%= link_to 'Upvote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "upvote-#{problem.id}" %>
+          <div class="problem-vote-container">
+            <% if ProblemVote.where(user: current_user, problem: problem) == [] || ProblemVote.find_by(user: current_user, problem: problem, vote: 0) %>
+              <span class="problem-vote">
+                <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-upvote upvote-#{problem.id}" %>
+                <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-cancel-vote cancel-vote-#{problem.id}", style: "display: none;" %>
               </span>
-            <% elsif ProblemVote.find_by(user: current_user, problem: problem) != nil %>
-              <span class="cancel-vote" >
-                <%= link_to 'Cancel vote', 'javascript:void(0)', data: { problem_id: problem.id, vote_id: ProblemVote.find_by(user: current_user, problem: problem).id }, class: "cancel-vote-#{problem.id}" %>
+            <% elsif ProblemVote.find_by(user: current_user, problem: problem, vote: 1) %>
+              <span class="problem-vote" >
+                <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-cancel-vote cancel-vote-#{problem.id}" %>
+                <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-upvote upvote-#{problem.id}", style: "display: none;" %>
               </span>
             <% end %>
           </div>
         <% end %>
       </span>
+
       <div class="card">
         <div class="content">
           <span class="title"><%= link_to problem.title, problem_path(problem) %></span>
@@ -35,7 +39,7 @@
             <span class="tags radius alert label"><%= problem.urgency_level.name %></span>
             <span class="tags radius success label"><%= problem.status.name %></span>
           </span>
-          <p>Two roads diverged in a yellow wood,	 And sorry I could not travel both	 And be one traveler, long I stood	 And looked down one as far as I could	. To where it bent in the undergrowth;</p>
+          <p><%= problem.description %></p>
         </div>
         <div class="action">
           <span class="left">Submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>

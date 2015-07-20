@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20150719152330) do
   end
 
   create_table "problem_votes", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "problem_id", null: false
+    t.integer  "user_id",                null: false
+    t.integer  "problem_id",             null: false
+    t.integer  "vote",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

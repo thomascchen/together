@@ -3,8 +3,8 @@ class SolutionVotesController < ApplicationController
     if params[:solution_id]
       @solution = Solution.find(params[:solution_id])
       @vote = SolutionVote.find_or_create_by(
-        solution_id: params[:solution_id],
-        user_id: params[:user_id]
+        user_id: params[:user_id],
+        solution_id: params[:solution_id]
       )
       @vote.update(vote: params[:vote])
     end
