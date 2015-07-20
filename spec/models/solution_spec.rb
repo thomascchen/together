@@ -27,6 +27,6 @@ RSpec.describe Solution, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
     it { should belong_to(:problem) }
-    it { should have_many(:solution_votes).dependent(:destroy)  }
+    it { should have_many(:solution_votes).dependent(:destroy) }
   end
 end
