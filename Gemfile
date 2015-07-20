@@ -31,6 +31,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'foundation-rails'
+gem 'carrierwave'
+gem 'fog'
 
 group :test do
   gem 'coveralls', require: false
@@ -57,6 +59,7 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
   gem 'pry-rails'
+  gem "dotenv-rails"
 end
 
 group :production do

@@ -50,6 +50,9 @@
         <span class="tags radius alert label"><%= @problem.urgency_level.name %></span>
         <span class="tags radius success label status-label"><%= @problem.status.name %></span>
       </span>
+      <% if @problem.photo.present? %>
+        <%= image_tag("#{@problem.photo}", class: "twelve columns center") %>
+      <% end %>
       <p><%= @problem.description %></p>
     </div>
     <div class="action">

@@ -14,6 +14,7 @@ feature 'user creates a new problem', %{
   # [x] If user submits incomplete information, they are shown an error message
   #     and the form is re-rendered with previously entered information
   # [x] User must be authenticated to post a new problem
+  # [ ] User can optionally upload a photo
 
   let(:user) { FactoryGirl.create(:user) }
   let!(:category) { Category.create(name: 'Heat and Essential') }
@@ -27,11 +28,15 @@ feature 'user creates a new problem', %{
     fill_in 'Description', with: 'Heat is broken yet again!'
     choose "problem_category_id_#{category.id}"
     choose "problem_urgency_level_id_#{urgency_level.id}"
+    attach_file "Upload Picture", (
+      "#{Rails.root}/spec/support/images/problem.jpg"
+    )
 
     click_button('Submit')
 
     expect(page).to have_content('Problem submitted')
     expect(page).to have_content("Heat's broken!")
+    expect(page).to have_selector('img')
   end
 
   scenario 'authenticated user enters invalid information' do

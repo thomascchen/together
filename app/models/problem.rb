@@ -13,7 +13,5 @@ class Problem < ActiveRecord::Base
   validates :user_id, presence: true
   validates :urgency_level_id, presence: true
 
-  # def votes_tally
-  #   votes.sum(:user_vote)
-  # end
+  mount_uploader :photo, ProblemPhotoUploader
 end
