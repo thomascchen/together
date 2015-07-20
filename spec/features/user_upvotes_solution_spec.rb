@@ -60,20 +60,21 @@ feature 'user upvotes solution', %{
     )
   end
 
-  scenario 'authenticated user upvotes and cancels vote on solution', js: true do
-    sign_in(FactoryGirl.create(:user))
-    click_on open_problem.title
-    click_on('Upvote Solution')
+  scenario 'authenticated user upvotes and cancels vote on solution',
+    js: true do
+      sign_in(FactoryGirl.create(:user))
+      click_on open_problem.title
+      click_on('Upvote Solution')
 
-    expect(page).to have_content('Score: 1')
-    expect(page).to_not have_link('Upvote Solution')
+      expect(page).to have_content('Score: 1')
+      expect(page).to_not have_link('Upvote Solution')
 
-    click_on('Cancel Solution vote')
+      click_on('Cancel Solution vote')
 
-    expect(page).to have_content('Score: 0')
-    expect(page).to_not have_content('Score: 1')
-    expect(page).to have_link('Upvote Solution')
-  end
+      expect(page).to have_content('Score: 0')
+      expect(page).to_not have_content('Score: 1')
+      expect(page).to have_link('Upvote Solution')
+    end
 
   scenario 'authenticated user cannot vote on own solution' do
     sign_in(user)
