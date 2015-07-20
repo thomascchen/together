@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root 'problems#index'
   devise_for :users
+
+  root 'problems#index'
 
   resources :users, only: [:new, :create, :show] do
     resources :problems, except: [:index, :show]

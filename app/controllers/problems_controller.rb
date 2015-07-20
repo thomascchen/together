@@ -1,4 +1,6 @@
 class ProblemsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @user = User.find(params[:user_id]) unless !params[:user_id]
     @problems = Problem.where(status_id: 1).order(

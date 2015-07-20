@@ -1,4 +1,6 @@
 class SolutionsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @problem = Problem.find(params[:problem_id])
     @solution = Solution.new(solution_params)
