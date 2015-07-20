@@ -57,7 +57,7 @@
         <span class="left">
           Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %>
           <% if current_user == @problem.user %>
-            <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> <a href="#" data-reveal-id="deleteModal">Delete</a>
+            <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> <a href="#" data-reveal-id="deleteProblemModal">Delete Problem</a>
           <% end %>
         </span>
         <span class="right">
@@ -67,7 +67,7 @@
       </div>
     </div>
     <br />
-
+    
     <ul class="accordion" data-accordion>
       <li class="accordion-navigation">
         <a href="#panel1a">Submit Solution</a>
@@ -151,7 +151,7 @@
             <span class="left">
               Submitted by <%= link_to solution.user.name, user_path(solution.user) %>
               <% if current_user == solution.user %>
-                <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <%= link_to "Delete", problem_solution_path(@problem, solution), method: :delete %></a>
+                <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <a href="#" data-reveal-id="deleteSolutionModal">Delete Solution</a>
               <% end %>
             </span>
             <span class="right">Created <%= solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
@@ -159,11 +159,17 @@
           </div>
         </div>
         <br />
+        <div id="deleteSolutionModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Are you sure?</h2><br />
+          <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
+          <%= link_to "Delete", problem_solution_path(@problem, solution), method: :delete, class: "button radius", id: "delete-modal-button" %>
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
         <% end %>
       </div>
     </div>
   </div>
-  <div id="deleteModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div id="deleteProblemModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <h2 id="modalTitle">Are you sure?</h2><br />
     <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
     <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete, class: "button radius", id: "delete-modal-button" %>
