@@ -60,63 +60,40 @@ feature 'user upvotes solution', %{
     )
   end
 
-  scenario 'authenticated user upvotes and cancels vote on solution' do
+  scenario 'authenticated user upvotes and cancels vote on solution', js: true do
     sign_in(FactoryGirl.create(:user))
     click_on open_problem.title
-    # within(:xpath, '//div[@class="solution-vote-container"]') do
     click_on('Upvote Solution')
-    # end
-    visit problem_path(open_problem)
+
     expect(page).to have_content('Score: 1')
-    # expect(page.has_xpath?('.//a', text: 'Upvote', count: 1))
+    expect(page).to_not have_link('Upvote Solution')
 
+    click_on('Cancel Solution vote')
 
-    # visit problem_path(open_problem)
-    #
-    # expect(page).to have_content('Score: 1')
-
-    # within(:xpath, '//div[@class="solution-vote-container"]') do
-      # click_on('Cancel Solution vote')
-    # end
-
-    # expect(page).to have_content('Score: 0')
-    # expect(page.has_xpath?('.//a', text: 'Cancel Upvote', count: 1))
-
-    # visit problem_path(open_problem)
-
-    # expect(page).to have_content('Score: 0')
-    # expect(page.has_xpath?('.//a', text: 'Upvote', count: 2))
+    expect(page).to have_content('Score: 0')
+    expect(page).to_not have_content('Score: 1')
+    expect(page).to have_link('Upvote Solution')
   end
 
-  # scenario 'authenticated user cannot vote on own problem' do
-  #   sign_in(user)
-  #
-  #   expect(page).to_not have_link('Upvote')
-  # end
-  #
-  # scenario 'unauthenticated user cannot vote on problem' do
-  #   visit root_path
-  #
-  #   expect(page).to_not have_link('Upvote')
-  # end
-  #
-  # scenario 'authenticated user cannot vote on solved problems' do
-  #   solved_problem = FactoryGirl.create(
-  #     :problem,
-  #     user: user,
-  #     category: category,
-  #     urgency_level: urgency_level,
-  #     status: solved_status
-  #   )
-  #
-  #   sign_in(FactoryGirl.create(:user))
-  #   click_on 'Solved Problems'
-  #
-  #   expect(page).to_not have_link('Upvote')
-  #
-  #   click_on solved_problem.title
-  #
-  #   expect(page).to_not have_link('Upvote')
-  # end
+  scenario 'authenticated user cannot vote on own solution' do
+    sign_in(user)
+    click_on open_problem.title
+
+    expect(page).to_not have_link('Upvote Solution')
+  end
+
+  scenario 'unauthenticated user cannot vote on solution' do
+    visit problem_path(open_problem)
+
+    expect(page).to_not have_link('Upvote Solution')
+  end
+
+  scenario 'authenticated user cannot vote on solutions for solved problems' do
+    sign_in(FactoryGirl.create(:user))
+    click_on 'Solved Problems'
+    click_on solved_problem.title
+
+    expect(page).to_not have_link('Upvote Solution')
+  end
 
 end
