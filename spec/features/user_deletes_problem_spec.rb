@@ -12,8 +12,6 @@ feature 'user deletes a problem', %{
   # [x] User must be authenticated to delete a problem
   # [x] When user deletes problem, they are shown a confirmation modal and then
   #     a success message upon confirmation
-  # [ ] When a user deletes a problem, associated solutions and votes are also
-  #     deleted
 
   let(:category) { Category.create(name: "Heat and Essential") }
   let(:urgency_level) { UrgencyLevel.create(id: 1, name: "Immediate") }
