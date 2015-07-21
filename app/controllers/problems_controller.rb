@@ -26,7 +26,8 @@ class ProblemsController < ApplicationController
     @solutions = Solution.find_by_sql("
       SELECT problems.id, solutions.id, solutions.title, solutions.description,
         solutions.accepted, solutions.user_id, solutions.problem_id,
-        solutions.created_at, solutions.updated_at, SUM(solution_votes.vote)
+        solutions.created_at, solutions.updated_at,
+      SUM(solution_votes.vote)
       FROM problems
       JOIN solutions
       ON problems.id = solutions.problem_id
@@ -34,7 +35,8 @@ class ProblemsController < ApplicationController
       ON solutions.id = solution_votes.solution_id
       WHERE problems.id = #{@problem.id}
       GROUP BY problems.id, solutions.id
-      ORDER BY SUM(solution_votes.vote) DESC NULLS LAST, solutions.updated_at DESC;
+      ORDER BY SUM(solution_votes.vote) DESC NULLS LAST,
+        solutions.updated_at DESC;
     ")
   end
 

@@ -2,12 +2,12 @@ $(".problem-upvote").on("click", function(event) {
   event.preventDefault();
   var userId = $(this).attr("data-user-id");
   var problemId = $(this).attr("data-problem-id");
-  var voteTotal = +$(this).text().match(/\d+/)[0]
+  var voteTotal = +$(this).text().match(/\d+/)[0];
   voteTotal++;
 
   $(this).hide();
   $(this).closest(".problem-vote").find(".cancel-vote-" + problemId).show()
-    .text('+ ' + voteTotal);
+    .text("+ " + voteTotal);
 
   $.ajax({
     type: "POST",
@@ -23,12 +23,12 @@ $(".problem-cancel-vote").on("click", function(event) {
   event.preventDefault();
   var userId = $(this).attr("data-user-id");
   var problemId = $(this).attr("data-problem-id");
-  var voteTotal = +$(this).text().match(/\d+/)[0]
+  var voteTotal = +$(this).text().match(/\d+/)[0];
   voteTotal--;
 
   $(this).hide();
   $(this).closest(".problem-vote").find(".upvote-" + problemId).show()
-    .text('+ ' + voteTotal);
+    .text("+ " + voteTotal);
 
   $.ajax({
     type: "POST",

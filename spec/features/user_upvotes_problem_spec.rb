@@ -56,7 +56,7 @@ feature 'user upvotes problem', %{
       expect(page).to_not have_content('+ 1')
     end
 
-    scenario 'unauthenticated user cannot vote on problem' do
+  scenario 'unauthenticated user cannot vote on problem' do
     visit root_path
 
     expect(page).to_not have_link('+ 0')
