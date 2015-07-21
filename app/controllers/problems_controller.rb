@@ -3,16 +3,39 @@ class ProblemsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id]) unless !params[:user_id]
-    @problems = Problem.where(status_id: 1).order(
-      :urgency_level_id,
-      updated_at: :desc
-    )
+    @problems = Problem.find_by_sql("
+      SELECT problems.id, problems.title, problems.description,
+        problems.category_id, problems.urgency_level_id, problems.status_id,
+        problems.user_id, problems.created_at, problems.updated_at,
+        problems.photo,
+      SUM(problem_votes.vote)
+      FROM problems
+      LEFT JOIN problem_votes
+      ON problems.id = problem_votes.problem_id
+      WHERE problems.status_id = 1
+      GROUP BY problems.id
+      ORDER BY problems.urgency_level_id ASC, problems.updated_at DESC,
+        SUM(problem_votes.vote) DESC NULLS LAST;
+    ")
   end
 
   def show
     @problem = Problem.find(params[:id])
     @solution = Solution.new
-    @solutions = @problem.solutions.order(created_at: :desc)
+
+    @solutions = Solution.find_by_sql("
+      SELECT problems.id, solutions.id, solutions.title, solutions.description,
+        solutions.accepted, solutions.user_id, solutions.problem_id,
+        solutions.created_at, solutions.updated_at, SUM(solution_votes.vote)
+      FROM problems
+      JOIN solutions
+      ON problems.id = solutions.problem_id
+      LEFT JOIN solution_votes
+      ON solutions.id = solution_votes.solution_id
+      WHERE problems.id = #{@problem.id}
+      GROUP BY problems.id, solutions.id
+      ORDER BY SUM(solution_votes.vote) DESC NULLS LAST, solutions.updated_at DESC;
+    ")
   end
 
   def new
