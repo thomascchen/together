@@ -16,39 +16,34 @@
 <br />
 <div class="row">
   <span class="vote left">
-    <p>
-      Score:
-      <span class="vote-score-<%= @problem.id %>">
-        <% if ProblemVote.where(problem: @problem).first == nil %>
-          0
-        <% else %>
-          <%= ProblemVote.where(problem: @problem).sum(:vote) %>
-        <% end %>
-      </span>
-    </p>
-    <% unless Problem.find_by(id: @problem.id, user: current_user) || @problem.status_id == 2 %>
-      <div class="problem-vote-container">
-        <% if ProblemVote.where(user: current_user, problem: @problem) == [] || ProblemVote.find_by(user: current_user, problem: @problem, vote: 0) %>
-          <span class="problem-vote">
-            <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id}" %>
-            <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id}", style: "display: none;" %>
-          </span>
-        <% elsif ProblemVote.find_by(user: current_user, problem: @problem, vote: 1) %>
-          <span class="problem-vote" >
-            <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id}" %>
-            <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id}", style: "display: none;" %>
-          </span>
-        <% end %>
-      </div>
+    <% if ProblemVote.where(problem: @problem).first == nil || ProblemVote.where(problem: @problem).sum(:vote) == 0 %>
+      <% problem_votes = 0 %>
+    <% else %>
+      <% problem_votes = ProblemVote.where(problem: @problem).sum(:vote) %>
     <% end %>
+
+    <div class="problem-vote-container">
+      <% if ProblemVote.where(user: current_user, problem: @problem) == [] || ProblemVote.find_by(user: current_user, problem: @problem, vote: 0) %>
+        <span class="problem-vote">
+          <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id} button tiny secondary" %>
+          <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id} button tiny alert", style: "display: none;" %>
+        </span>
+      <% elsif ProblemVote.find_by(user: current_user, problem: @problem, vote: 1) %>
+        <span class="problem-vote" >
+          <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-cancel-vote cancel-vote-#{@problem.id} button tiny alert" %>
+          <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: @problem.id }, class: "problem-upvote upvote-#{@problem.id} button tiny secondary", style: "display: none;" %>
+        </span>
+      <% end %>
+    </div>
   </span>
+
   <div class="card">
     <div class="content">
       <span class="title"><%= @problem.title %></span>
       <span class="right">
-        <span class="tags radius warning label"><%= @problem.category.name %></span>
-        <span class="tags radius alert label"><%= @problem.urgency_level.name %></span>
-        <span class="tags radius success label status-label"><%= @problem.status.name %></span>
+        <span class="tags warning label"><%= @problem.category.name %></span>
+        <span class="tags alert label"><%= @problem.urgency_level.name %></span>
+        <span class="tags success label status-label"><%= @problem.status.name %></span>
       </span>
       <% if @problem.photo.present? %>
         <%= image_tag("#{@problem.photo}", class: "twelve columns center") %>
@@ -83,97 +78,92 @@
 
   <div class="row">
     <div class="medium-12 columns end">
-      <% @solutions.each do |solution| %>
-
-      <span class="vote left">
-        <p>
-          Score:
-          <span class="vote-score-<%= solution.id %>">
-            <% if SolutionVote.where(solution: solution).first == nil %>
-              0
+      <% if @problem.solutions %>
+        <% @solutions.each do |solution| %>
+          <span class="vote left">
+            <% if SolutionVote.where(solution: solution).first == nil || SolutionVote.where(solution: solution).sum(:vote) == 0 %>
+              <% solution_votes = 0 %>
             <% else %>
-              <%= SolutionVote.where(solution: solution).sum(:vote) %>
+              <% solution_votes = SolutionVote.where(solution: solution).sum(:vote) %>
             <% end %>
+
+            <div class="solution-vote-container">
+              <% if SolutionVote.where(user: current_user, solution: solution) == [] || SolutionVote.find_by(user: current_user, solution: solution, vote: 0) %>
+                <span class="solution-vote">
+                  <%= link_to '+ ' + solution_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-upvote upvote-#{solution.id} button tiny secondary" %>
+                  <%= link_to '+ ' + solution_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-cancel-vote cancel-vote-#{solution.id}  button tiny alert", style: "display: none;" %>
+                </span>
+              <% elsif SolutionVote.find_by(user: current_user, solution: solution, vote: 1) %>
+                <span class="solution-vote" >
+                  <%= link_to '+ ' + solution_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-cancel-vote cancel-vote-#{solution.id}  button tiny alert" %>
+                  <%= link_to '+ ' + solution_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-upvote upvote-#{solution.id} button tiny secondary", style: "display: none;" %>
+                </span>
+              <% end %>
+            </div>
           </span>
-        </p>
-        <% unless Solution.find_by(id: solution.id, user: current_user) || solution.problem.status_id == 2 %>
-          <div class="solution-vote-container">
-            <% if SolutionVote.where(user: current_user, solution: solution) == [] || SolutionVote.find_by(user: current_user, solution: solution, vote: 0) %>
-              <span class="solution-vote">
-                <%= link_to 'Upvote Solution', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-upvote upvote-#{solution.id}" %>
-                <%= link_to 'Cancel Solution vote', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-cancel-vote cancel-vote-#{solution.id}", style: "display: none;" %>
+
+          <div class="card">
+            <div class="content">
+              <span class="title"><%= solution.title %></span>
+              <% if solution.accepted == true %>
+                  <span class="tags success label">Accepted</span>
+              <% end %>
+              <% if solution.accepted == true && current_user == @problem.user %>
+                <span class="right">
+                  <%= form_for [@problem, Solution.find(solution.id)] do |f| %>
+                    <%= f.hidden_field :accepted, value: false %>
+                      <div>
+                        <% prefix = "solution[existing_problem_attributes]" %>
+                        <%= fields_for prefix, @problem do |f| %>
+                          <%= f.hidden_field :status_id, value: 1 %>
+                        <% end %>
+                      </div>
+                    <%= f.submit "Unaccept Solution", class: "button tiny" %>
+                  <% end %>
+                </span>
+              <% end %>
+              <% if !@problem.solutions.where('accepted = true').any? && current_user == @problem.user %>
+                <span class="right">
+                  <%= form_for [@problem, Solution.find(solution.id)] do |f| %>
+                    <%= f.hidden_field :accepted, value: true %>
+                      <div>
+                        <% prefix = "solution[existing_problem_attributes]" %>
+                        <%= fields_for prefix, @problem do |f| %>
+                          <%= f.hidden_field :status_id, value: 2 %>
+                        <% end %>
+                      </div>
+                    <%= f.submit "Accept Solution", class: "button tiny" %>
+                  <% end %>
+                </span>
+              <% end %>
+              <p><%= solution.description %></p>
+            </div>
+            <div class="action">
+              <span class="left">
+                Submitted by <%= link_to solution.user.name, user_path(solution.user) %>
+                <% if current_user == solution.user %>
+                  <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <a href="#" data-reveal-id="deleteSolutionModal">Delete Solution</a>
+                <% end %>
               </span>
-            <% elsif SolutionVote.find_by(user: current_user, solution: solution, vote: 1) %>
-              <span class="solution-vote" >
-                <%= link_to 'Cancel Solution vote', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-cancel-vote cancel-vote-#{solution.id}" %>
-                <%= link_to 'Upvote Solution', 'javascript:void(0)', data: { user_id: current_user.id, solution_id: solution.id }, class: "solution-upvote upvote-#{solution.id}", style: "display: none;" %>
-              </span>
-            <% end %>
+              <span class="right">Created <%= solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
+            <br />
+            </div>
+          </div>
+          <br />
+          <div id="deleteSolutionModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <h2 id="modalTitle">Are you sure?</h2><br />
+            <%= link_to "Cancel", problem_path(@problem), class: "button secondary" %>
+            <%= link_to "Delete", problem_solution_path(@problem, solution), method: :delete, class: "button", id: "delete-modal-button" %>
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
           </div>
         <% end %>
-      </span>
-
-      <div class="card">
-        <div class="content">
-          <span class="title"><%= solution.title %></span>
-          <% if solution.accepted == true %>
-              <span class="tags radius success label">Accepted</span>
-          <% end %>
-          <% if solution.accepted == true && current_user == @problem.user %>
-            <span class="right">
-              <%= form_for [@problem, Solution.find(solution.id)] do |f| %>
-                <%= f.hidden_field :accepted, value: false %>
-                  <div>
-                    <% prefix = "solution[existing_problem_attributes]" %>
-                    <%= fields_for prefix, @problem do |f| %>
-                      <%= f.hidden_field :status_id, value: 1 %>
-                    <% end %>
-                  </div>
-                <%= f.submit "Unaccept Solution", class: "button tiny radius" %>
-              <% end %>
-            </span>
-          <% end %>
-          <% if !@problem.solutions.where('accepted = true').any? && current_user == @problem.user %>
-            <span class="right">
-              <%= form_for [@problem, Solution.find(solution.id)] do |f| %>
-                <%= f.hidden_field :accepted, value: true %>
-                  <div>
-                    <% prefix = "solution[existing_problem_attributes]" %>
-                    <%= fields_for prefix, @problem do |f| %>
-                      <%= f.hidden_field :status_id, value: 2 %>
-                    <% end %>
-                  </div>
-                <%= f.submit "Accept Solution", class: "button tiny radius" %>
-              <% end %>
-            </span>
-          <% end %>
-          <p><%= solution.description %></p>
-        </div>
-        <div class="action">
-          <span class="left">
-            Submitted by <%= link_to solution.user.name, user_path(solution.user) %>
-            <% if current_user == solution.user %>
-              <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <a href="#" data-reveal-id="deleteSolutionModal">Delete Solution</a>
-            <% end %>
-          </span>
-          <span class="right">Created <%= solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
-        <br />
-        </div>
-      </div>
-      <br />
-      <div id="deleteSolutionModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <h2 id="modalTitle">Are you sure?</h2><br />
-        <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
-        <%= link_to "Delete", problem_solution_path(@problem, solution), method: :delete, class: "button radius", id: "delete-modal-button" %>
-        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-      </div>
       <% end %>
     </div>
   </div>
 </div>
 <div id="deleteProblemModal" class="reveal-modal tiny text-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
   <h2 id="modalTitle">Are you sure?</h2><br />
-  <%= link_to "Cancel", problem_path(@problem), class: "button radius secondary" %>
-  <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete, class: "button radius", id: "delete-modal-button" %>
+  <%= link_to "Cancel", problem_path(@problem), class: "button secondary" %>
+  <%= link_to "Delete", user_problem_path(@problem.user, @problem), method: :delete, class: "button", id: "delete-modal-button" %>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

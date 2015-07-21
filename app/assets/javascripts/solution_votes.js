@@ -2,13 +2,12 @@ $(".solution-upvote").on("click", function(event) {
   event.preventDefault();
   var userId = $(this).attr("data-user-id");
   var solutionId = $(this).attr("data-solution-id");
-  var voteTotal = $(this).closest(".vote").find(
-    ".vote-score-" + solutionId
-  ).text();
+  var voteTotal = +$(this).text().match(/\d+/)[0];
   voteTotal++;
-  $(this).closest(".vote").find(".vote-score-" + solutionId).text(voteTotal);
+
   $(this).hide();
-  $(this).closest(".solution-vote").find(".cancel-vote-" + solutionId).show();
+  $(this).closest(".solution-vote").find(".cancel-vote-" + solutionId).show()
+    .text("+ " + voteTotal);
 
   $.ajax({
     type: "POST",
@@ -24,13 +23,12 @@ $(".solution-cancel-vote").on("click", function(event) {
   event.preventDefault();
   var userId = $(this).attr("data-user-id");
   var solutionId = $(this).attr("data-solution-id");
-  var voteTotal = $(this).closest(".vote").find(
-    ".vote-score-" + solutionId
-  ).text();
+  var voteTotal = +$(this).text().match(/\d+/)[0];
   voteTotal--;
-  $(this).closest(".vote").find(".vote-score-" + solutionId).text(voteTotal);
+
   $(this).hide();
-  $(this).closest(".solution-vote").find(".upvote-" + solutionId).show();
+  $(this).closest(".solution-vote").find(".upvote-" + solutionId).show()
+    .text("+ " + voteTotal);
 
   $.ajax({
     type: "POST",

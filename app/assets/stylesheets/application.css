@@ -42,3 +42,7 @@ div.radio-error > div.field_with_errors {
   margin-right: 2%;
   margin-top: 3.5%;
 }
+
+.important {
+  color: black;
+}

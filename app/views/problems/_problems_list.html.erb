@@ -2,52 +2,45 @@
   <div class="medium-12 columns end main">
     <% if @problems %>
       <% @problems.each do |problem| %>
+        <span class="vote left">
+          <% if ProblemVote.where(problem: problem).first == nil || ProblemVote.where(problem: problem).sum(:vote) == 0 %>
+            <% problem_votes = 0 %>
+          <% else %>
+            <% problem_votes = ProblemVote.where(problem: problem).sum(:vote) %>
+          <% end %>
 
-      <span class="vote left">
-        <p>
-          Score:
-          <span class="vote-score-<%= problem.id %>">
-            <% if ProblemVote.where(problem: problem).first == nil %>
-              0
-            <% else %>
-              <%= ProblemVote.where(problem: problem).sum(:vote) %>
-            <% end %>
-          </span>
-        </p>
-        <% unless Problem.find_by(id: problem.id, user: current_user) || problem.status_id == 2 %>
           <div class="problem-vote-container">
             <% if ProblemVote.where(user: current_user, problem: problem) == [] || ProblemVote.find_by(user: current_user, problem: problem, vote: 0) %>
               <span class="problem-vote">
-                <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-upvote upvote-#{problem.id}" %>
-                <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-cancel-vote cancel-vote-#{problem.id}", style: "display: none;" %>
+                <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-upvote upvote-#{problem.id} button tiny secondary" %>
+                <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-cancel-vote cancel-vote-#{problem.id} button tiny alert", style: "display: none;" %>
               </span>
             <% elsif ProblemVote.find_by(user: current_user, problem: problem, vote: 1) %>
               <span class="problem-vote" >
-                <%= link_to 'Cancel Problem vote', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-cancel-vote cancel-vote-#{problem.id}" %>
-                <%= link_to 'Upvote Problem', 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-upvote upvote-#{problem.id}", style: "display: none;" %>
+                <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-cancel-vote cancel-vote-#{problem.id} button tiny alert" %>
+                <%= link_to '+ ' + problem_votes.to_s, 'javascript:void(0)', data: { user_id: current_user.id, problem_id: problem.id }, class: "problem-upvote upvote-#{problem.id} button tiny secondary", style: "display: none;" %>
               </span>
             <% end %>
           </div>
-        <% end %>
-      </span>
+        </span>
 
-      <div class="card">
-        <div class="content">
-          <span class="title"><%= link_to problem.title, problem_path(problem) %></span>
-          <span class="right">
-            <span class="tags radius warning label"><%= problem.category.name %></span>
-            <span class="tags radius alert label"><%= problem.urgency_level.name %></span>
-            <span class="tags radius success label"><%= problem.status.name %></span>
-          </span>
-          <p><%= problem.description %></p>
+        <div class="card">
+          <div class="content">
+            <span class="title"><%= link_to problem.title, problem_path(problem) %></span>
+            <span class="right">
+              <span class="tags warning label"><%= problem.category.name %></span>
+              <span class="tags alert label"><%= problem.urgency_level.name %></span>
+              <span class="tags success label"><%= problem.status.name %></span>
+            </span>
+            <p><%= problem.description %></p>
+          </div>
+          <div class="action">
+            <span class="left">Submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>
+            <span class="right">Updated <%= problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
+          <br />
+          </div>
         </div>
-        <div class="action">
-          <span class="left">Submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>
-          <span class="right">Updated <%= problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
         <br />
-        </div>
-      </div>
-      <br />
       <% end %>
     <% end %>
   </div>

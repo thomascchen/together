@@ -70,6 +70,6 @@ Problem.create(
   description: 'This a description',
   category_id: 2,
   urgency_level_id: 2,
-  status_id: 2,
+  status_id: 1,
   user_id: 1
 )

@@ -9,10 +9,8 @@ feature 'user upvotes solution', %{
   # Acceptance Criteria:
   # [x] User can upvote a solution they think is especially important
   # [x] User can remove upvote on a solution if they change their mind
-  # [x] User cannot upvote on their own solution
   # [x] User can only upvote once per solution
   # [x] User must be authenticated to vote
-  # [x] User cannot upvote solutions on solved problems
   # [x] Scores for solution votes are displayed on the problem show page.
 
   let(:category) { Category.create(name: "Heat and Essential") }
@@ -64,37 +62,20 @@ feature 'user upvotes solution', %{
     js: true do
       sign_in(FactoryGirl.create(:user))
       click_on open_problem.title
-      click_on('Upvote Solution')
+      first(:link, '+ 0').click
 
-      expect(page).to have_content('Score: 1')
-      expect(page).to_not have_link('Upvote Solution')
+      expect(page).to have_link('+ 1')
+      expect(page).to_not have_selector('a.problem-upvote')
 
-      click_on('Cancel Solution vote')
+      click_on('+ 1')
 
-      expect(page).to have_content('Score: 0')
-      expect(page).to_not have_content('Score: 1')
-      expect(page).to have_link('Upvote Solution')
+      expect(page).to_not have_selector('a.cancel-vote')
+      expect(page).to_not have_link('+ 1')
     end
-
-  scenario 'authenticated user cannot vote on own solution' do
-    sign_in(user)
-    click_on open_problem.title
-
-    expect(page).to_not have_link('Upvote Solution')
-  end
 
   scenario 'unauthenticated user cannot vote on solution' do
     visit problem_path(open_problem)
 
-    expect(page).to_not have_link('Upvote Solution')
+    expect(page).to_not have_link('+ 0')
   end
-
-  scenario 'authenticated user cannot vote on solutions for solved problems' do
-    sign_in(FactoryGirl.create(:user))
-    click_on 'Solved Problems'
-    click_on solved_problem.title
-
-    expect(page).to_not have_link('Upvote Solution')
-  end
-
 end
