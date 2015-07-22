@@ -43,3 +43,67 @@
   </div>
   <a class="close-reveal-modal">&#215;</a>
 </div>
+
+<div id="registrationModal" class="reveal-modal remove-whitespace" data-reveal>
+  <div class="row">
+    <div class="small-12 columns auth-plain">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="signup-panel center">
+          <p class="welcome">Sign Up</p>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.text_field :first_name, placeholder: "First Name", autofocus: true %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.text_field :last_name, placeholder: "Last Name" %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.email_field :email, placeholder: "Email" %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.label :building_id %><br />
+                <%= f.select :building_id, Building.all.map { |b| [b.street, b.id] } %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.label :unit, "Apartment Number" %><br />
+                <%= f.text_field :unit %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.label :neighborhood_id %><br />
+                <%= f.select :neighborhood_id, Neighborhood.all.map { |n| [n.name, n.id] } %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %><br />
+                <%= f.password_field :password, autocomplete: "off" %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <%= f.label :password_confirmation, "Password Confirmation" %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              </div>
+            </div>
+          </div>
+            <div class="small-12 columns">
+          <%= f.submit "Sign Up", class: "button expand" %>
+          </div>
+      <% end %>
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
