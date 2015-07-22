@@ -11,6 +11,7 @@
   <section class="top-bar-section">
     <ul class="right">
       <%- if current_user -%>
+        <li><%= link_to 'Building Data', highcharts_path %></li>
         <li><%= link_to 'Report an Issue', new_user_problem_path(current_user) %></li>
         <li><%= link_to 'Solved Problems', solved_problems_path %></li>
         <li><%= link_to 'Account', edit_user_registration_path %></li>
