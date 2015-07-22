@@ -1,8 +1,8 @@
 $(function () {
   $.ajax({
-    method: "GET",
-    url: "/highcharts",
-    dataType: "json"
+    method: 'GET',
+    url: '/highcharts',
+    dataType: 'json'
   })
 
 .done(function (users) {
@@ -44,7 +44,7 @@ $(function () {
         },
 
         series: [{
-            name: "Users",
+            name: 'Users',
             colorByPoint: true,
             data: users[1]
         }],

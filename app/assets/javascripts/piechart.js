@@ -1,8 +1,8 @@
 $(function () {
   $.ajax({
-    method: "GET",
-    url: "/highcharts",
-    dataType: "json"
+    method: 'GET',
+    url: '/highcharts',
+    dataType: 'json'
   })
 
   .done(function (problems) {
@@ -27,13 +27,16 @@ $(function () {
                       enabled: true,
                       format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                       style: {
-                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                          color: (
+                            Highcharts.theme &&
+                            Highcharts.theme.contrastTextColor
+                          ) || 'black'
                       }
                   }
               }
           },
           series: [{
-              name: "Problems",
+              name: 'Problems',
               colorByPoint: true,
               data: problems[0]
           }]

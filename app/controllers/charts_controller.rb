@@ -1,6 +1,5 @@
 class ChartsController < ApplicationController
   def index
-
     @categories = Category.all
     @problems_count = Problem.count.to_f
     @category_types = @categories.map do |cat|
@@ -28,9 +27,15 @@ class ChartsController < ApplicationController
         name: user.name,
         id: user.name,
         data: [
-          ['Problems Proposed', (user.problems.count.to_f / (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
-          ['Solutions Proposed', (user.solutions.count.to_f / (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
-          ['Solutions Accepted', (user.solutions.where(accepted: true).count.to_f / (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f]
+          ['Problems Proposed',
+            (user.problems.count.to_f /
+            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
+          ['Solutions Proposed',
+            (user.solutions.count.to_f /
+            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
+          ['Solutions Accepted',
+            (user.solutions.where(accepted: true).count.to_f /
+            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f]
         ],
         total: ((user.problems.count.to_f + user.solutions.count.to_f) /
           (Problem.count.to_f + Solution.count.to_f)).to_f
@@ -39,10 +44,9 @@ class ChartsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json:
+      format.json do render json:
         [@category_types, @user_contributions, @contribution_breakdown]
-      }
+      end
     end
-
   end
 end
