@@ -1,4 +1,4 @@
-class HomesController < ApplicationController
+class ChartsController < ApplicationController
   def index
 
     @categories = Category.all
@@ -8,7 +8,13 @@ class HomesController < ApplicationController
     end
 
     @users = User.all
-    @user_contributions = @users.map do |user|
+
+    @sorted_users = @users.sort_by do |user|
+      ((user.problems.count.to_f + user.solutions.count.to_f) /
+        (Problem.count.to_f + Solution.count.to_f)).to_f
+    end.reverse
+
+    @user_contributions = @sorted_users.map do |user|
       {
         name: user.name,
         y: ((user.problems.count.to_f + user.solutions.count.to_f) /
@@ -17,15 +23,17 @@ class HomesController < ApplicationController
       }
     end
 
-    @contribution_breakdown = @users.map do |user|
+    @contribution_breakdown = @sorted_users.map do |user|
       {
         name: user.name,
         id: user.name,
         data: [
           ['Problems Proposed', (user.problems.count.to_f / (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
-          ['Solutions Proposed', (user.solutions.where(accepted: false).count.to_f / (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
+          ['Solutions Proposed', (user.solutions.count.to_f / (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
           ['Solutions Accepted', (user.solutions.where(accepted: true).count.to_f / (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f]
-        ]
+        ],
+        total: ((user.problems.count.to_f + user.solutions.count.to_f) /
+          (Problem.count.to_f + Solution.count.to_f)).to_f
       }
     end
 

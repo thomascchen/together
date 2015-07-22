@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'problems#index'
 
-  get 'highcharts' => 'homes#index'
+  get 'highcharts' => 'charts#index'
 
   resources :users, only: [:new, :create, :show] do
     resources :problems, except: [:index, :show]

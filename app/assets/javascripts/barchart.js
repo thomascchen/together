@@ -5,7 +5,7 @@ $(function () {
     dataType: "json"
   })
 
-  .done(function () {
+.done(function (users) {
     $('#container-bar').highcharts({
         chart: {
             type: 'column'
@@ -14,14 +14,14 @@ $(function () {
             text: 'User Contributions'
         },
         subtitle: {
-            text: 'Click the columns to view more detail.'
+            text: 'Click the columns to view detail.'
         },
         xAxis: {
-            type: 'user'
+            type: 'category'
         },
         yAxis: {
             title: {
-                text: 'Total percent contributions'
+                text: 'Total percent user contributions'
             }
 
         },
@@ -48,8 +48,10 @@ $(function () {
             colorByPoint: true,
             data: users[1]
         }],
+
         drilldown: {
             series: users[2]
-        });
+        }
+      });
     });
 });
