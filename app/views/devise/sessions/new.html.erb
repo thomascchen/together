@@ -1,26 +1,45 @@
-<h2>Log in</h2>
+<a href="#" data-reveal-id="loginModal" class="signup-modal" style="display: none"></a>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div id="loginModal" class="reveal-modal remove-whitespace" data-reveal>
+  <div class="row">
+    <div class="large-6 columns auth-plain">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="signup-panel left-solid">
+          <p class="welcome">Registered Users</p>
+            <div class="row collapse">
+              <div class="small-2  columns">
+                <span class="prefix reg-img"><%= image_tag "ic_account_circle_black_36dp_1x.png" %></span>
+              </div>
+              <div class="small-10  columns">
+                <%= f.email_field :email, placeholder: "Email", autofocus: true %>
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-2 columns ">
+                <span class="prefix reg-img"><%= image_tag "ic_lock_black_36dp_1x.png" %></span>
+              </div>
+              <div class="small-10 columns ">
+                <%= f.password_field :password, placeholder: "Password", autocomplete: "off" %>
+              </div>
+              <% if devise_mapping.rememberable? -%>
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end -%>
+            </div>
+          <%= f.submit "Log In", class: "button" %>
+        <% end %>
+      </div>
     </div>
-  <% end -%>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="large-6 columns auth-plain">
+    	<div class="signup-panel newusers">
+    		<p class="welcome"> New User?</p>
+    		<a href="#" data-reveal-id="registrationModal" class="button ">Sign Up</a></br>
+    	</div>
+    </div>
+
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

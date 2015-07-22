@@ -2,6 +2,7 @@ class ProblemsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @problems_path = true
     @user = User.find(params[:user_id]) unless !params[:user_id]
     @problems = Problem.find_by_sql("
       SELECT problems.id, problems.title, problems.description,
