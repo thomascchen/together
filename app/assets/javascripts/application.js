@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require highcharts/highcharts.js
+//= require highcharts/data.js
+//= require highcharts/drilldown.js
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
