@@ -78,7 +78,6 @@ feature 'user views unsolved problems', %{
     expect(page).to have_content(problem.description)
     expect(page).to have_content(problem.category.name)
     expect(page).to have_content(problem.urgency_level.name)
-    expect(page).to have_content(problem.status.name)
     expect(page).to have_content(problem.user.name)
     expect(page).to have_content(
       problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p")
@@ -99,7 +98,6 @@ feature 'user views unsolved problems', %{
 
     expect(page).to have_content(solved_problem.title)
     expect(page).to have_content(solved_problem.category.name)
-    expect(page).to have_content(solved_problem.urgency_level.name)
     expect(page).to have_content(solved_problem.status.name)
     expect(page).to have_content(solved_problem.user.name)
     expect(page).to have_content(

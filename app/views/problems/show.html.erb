@@ -52,7 +52,7 @@
           <% end %>
         <% end %>
         <% if @problem.status.name == "Solved" %>
-        <span class="tags success label"><%= @problem.status.name %></span>
+        <span class="tags success label status-label"><%= @problem.status.name %></span>
         <% end %>
       </span>
       <% if @problem.photo.present? %>

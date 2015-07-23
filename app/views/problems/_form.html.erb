@@ -1,6 +1,6 @@
 <div>
   <% if @problem.errors.any? %>
-    <div>
+    <div class="text-center">
       <h2>
         Please fix
         <%= pluralize(@problem.errors.count, "error") %>:
@@ -12,6 +12,7 @@
       </p>
     </div>
   <% end %>
+
   <div class="row">
     <div class="medium-10 small-centered columns end">
       <div class="card">
