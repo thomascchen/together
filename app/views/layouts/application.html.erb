@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
   <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="<%= @problems_path ? 'problems-path' : '' %>">
@@ -12,10 +13,13 @@
   <%= render "layouts/top_bar" %>
 
   <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
-    </div>
-  <%- end -%>
+    <div data-alert class="alert-box">
+      <div class="flash flash-<%= key %>">
+        <%= value %>
+      </div>
+      <a href="#" class="close">&times;</a>
+      </div>
+    <%- end -%>
 
   <%= yield %>
 

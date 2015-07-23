@@ -41,9 +41,19 @@
     <div class="content">
       <span class="title"><%= @problem.title %></span>
       <span class="right">
-        <span class="tags warning label"><%= @problem.category.name %></span>
-        <span class="tags alert label"><%= @problem.urgency_level.name %></span>
-        <span class="tags success label status-label"><%= @problem.status.name %></span>
+        <span class="tags secondary label"><%= @problem.category.name %></span>
+        <% if @problem.status.name == "Open" %>
+          <% if @problem.urgency_level_id == 1 %>
+            <span class="tags alert label"><%= @problem.urgency_level.name %></span>
+          <% elsif @problem.urgency_level_id == 2 %>
+            <span class="tags warning label"><%= @problem.urgency_level.name %></span>
+          <% elsif @problem.urgency_level_id == 3 %>
+            <span class="tags success label"><%= @problem.urgency_level.name %></span>
+          <% end %>
+        <% end %>
+        <% if @problem.status.name == "Solved" %>
+        <span class="tags success label"><%= @problem.status.name %></span>
+        <% end %>
       </span>
       <% if @problem.photo.present? %>
         <%= image_tag("#{@problem.photo}", class: "twelve columns center") %>
@@ -65,12 +75,13 @@
   </div>
   <br />
 
-  <ul class="accordion" data-accordion>
+  <ul class="accordion small-11 columns text-center submit-solution" data-accordion>
     <li class="accordion-navigation">
-      <a href="#panel1a">Submit Solution</a>
+      <a href="#panel1a" class="submit-solution-button">Submit Solution</a>
       <div id="panel1a" class="content">
         <%= render partial: 'solutions/form' %>
       </div>
+      <br />
     </li>
   </ul>
 
