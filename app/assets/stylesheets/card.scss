@@ -1,3 +1,5 @@
+$teal : #29a68f;
+
 html,
 body {
   background: #fafafa;
@@ -35,7 +37,7 @@ body {
   }
 
   a {
-    color: #29A68F;
+    color: $teal;
     margin-right: 1.3rem;
     text-decoration: none;
     text-transform: uppercase;
