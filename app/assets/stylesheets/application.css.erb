@@ -16,9 +16,7 @@
 
  */
 
-/*.html {
-  background-color: #E0F2F1;
-}*/
+//= depend_on_asset "material_design_city.jpg"
 
 .tags {
   font-size: 10pt;
@@ -52,7 +50,7 @@ div.radio-error > div.field_with_errors {
 }
 
 html, body {
-  background-image: url("material_design_city.jpg");
+  background-image: url('<%= asset_path('material_design_city.jpg') %>');
   background-size: cover;
   background-attachment: fixed;
   background-color: #FAFAFA;
