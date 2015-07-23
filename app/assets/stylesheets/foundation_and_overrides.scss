@@ -88,6 +88,7 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to define default font stacks
 // $font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family-sans-serif: "Noto Sans", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 // $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
@@ -112,6 +113,7 @@ $include-html-global-classes: $include-html-classes;
 // $charcoal    : #555555;
 // $tuatara     : #444444;
 // $oil         : #333333;
+$oil         : #005045;
 // $jet         : #222222;
 // $black       : #000000;
 
@@ -119,12 +121,16 @@ $include-html-global-classes: $include-html-classes;
 // $primary-color: #008CBA;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
+$alert-color: #ff3b77;
 // $success-color: #43AC6A;
+$success-color: #06b219;
 // $warning-color: #f08a24;
+$warning-color: #ff762e;
 // $info-color: #a0d3e8;
 
 // We use these to control various global styles
 // $body-bg: $white;
+$body-bg: #fafafa;
 // $body-font-color: $jet;
 // $body-font-family: $font-family-sans-serif;
 // $body-font-weight: $font-weight-normal;
@@ -211,9 +217,11 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to control header font styles
 // $header-font-family: $body-font-family;
+$header-font-family: 'Arvo', serif;
 // $header-font-weight: $font-weight-normal;
 // $header-font-style: normal;
 // $header-font-color: $jet;
+$header-font-color: #005045;
 // $header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
@@ -221,6 +229,7 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to control header font sizes
 // $h1-font-size: rem-calc(44);
+$h1-font-size: rem-calc(56);
 // $h2-font-size: rem-calc(37);
 // $h3-font-size: rem-calc(27);
 // $h4-font-size: rem-calc(23);
@@ -341,6 +350,7 @@ $include-html-global-classes: $include-html-classes;
 // $accordion-navigation-font-family: $body-font-family;
 
 // $accordion-content-padding: ($column-gutter/2);
+$accordion-content-padding: none;
 // $accordion-content-active-bg-color: $white;
 
 // 02. Alert Boxes
@@ -465,6 +475,7 @@ $include-html-global-classes: $include-html-classes;
 // $button-border-width: 0;
 // $button-border-style: solid;
 // $button-bg-color: $primary-color;
+$button-bg-color: #259cbd;
 // $button-bg-hover: scale-color($button-bg-color, $lightness: $button-function-factor);
 // $button-border-color: $button-bg-hover;
 // $secondary-button-bg-hover: scale-color($secondary-color, $lightness: $button-function-factor);
@@ -1423,7 +1434,7 @@ $input-box-shadow: none;
 // $topbar-link-font-size: rem-calc(13);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 // $topbar-link-bg: $topbar-bg;
-// $topbar-link-bg-hover: $jet;
+$topbar-link-bg-hover: #177d6a;
 // $topbar-link-bg-color-hover: $charcoal;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);

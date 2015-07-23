@@ -1,6 +1,9 @@
+$teal : #29a68f;
+
 html,
 body {
   background: #fafafa;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .card {
@@ -8,13 +11,14 @@ body {
   border-radius: 2px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   color: #272727;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   overflow: hidden;
 
   .title {
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 3rem;
+    font-family: 'Noto Sans', sans-serif;
   }
 
   .content {
@@ -33,7 +37,7 @@ body {
   }
 
   a {
-    color: #ffab40;
+    color: $teal;
     margin-right: 1.3rem;
     text-decoration: none;
     text-transform: uppercase;

@@ -22,7 +22,6 @@ class ProblemsController < ApplicationController
   def show
     @problem = Problem.find(params[:id])
     @solution = Solution.new
-
     @solutions = Solution.find_by_sql("
       SELECT problems.id, solutions.id, solutions.title, solutions.description,
         solutions.accepted, solutions.user_id, solutions.problem_id,

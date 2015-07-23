@@ -1,6 +1,6 @@
 <div>
   <% if @problem.errors.any? %>
-    <div>
+    <div class="text-center">
       <h2>
         Please fix
         <%= pluralize(@problem.errors.count, "error") %>:
@@ -12,9 +12,6 @@
       </p>
     </div>
   <% end %>
-
-  <br \>
-  <br \>
 
   <div class="row">
     <div class="medium-10 small-centered columns end">
@@ -50,7 +47,7 @@
                 <%= f.file_field :photo %>
             </div>
             <div>
-              <%= f.submit "Submit", class: "button radius", "aria-label" => "submit form" %>
+              <%= f.submit "Submit", class: "button expand", "aria-label" => "submit form" %>
             </div>
           <% end %>
         </div>

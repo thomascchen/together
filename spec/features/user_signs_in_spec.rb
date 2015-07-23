@@ -28,7 +28,7 @@ feature 'user signs in', %{
 
     fill_in 'Email', with: 'john@smith.com'
     fill_in 'Password', with: 'wrongpassword'
-    click_button 'Log in'
+    click_button 'Sign In'
 
     expect(page).to have_content('Invalid email or password')
     expect(page).to_not have_content('Signed in successfully')
@@ -41,7 +41,7 @@ feature 'user signs in', %{
 
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'wrongpassword'
-    click_button 'Log in'
+    click_button 'Sign In'
 
     expect(page).to have_content('Invalid email or password')
     expect(page).to_not have_content('Signed in successfully')
