@@ -1,109 +1,40 @@
-<a href="#" data-reveal-id="loginModal" class="signup-modal" style="display: none"></a>
+<div class="row signin-container">
+  <div class="medium-6 small-centered columns end">
+    <div class="card">
+      <div class="content">
 
-<div id="loginModal" class="reveal-modal remove-whitespace" data-reveal>
-  <div class="row">
-    <div class="large-6 columns auth-plain">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="signup-panel left-solid">
-          <p class="welcome">Registered Users</p>
-            <div class="row collapse">
-              <div class="small-2  columns">
-                <span class="prefix reg-img"><%= image_tag "ic_account_circle_black_36dp_1x.png" %></span>
-              </div>
-              <div class="small-10  columns">
-                <%= f.email_field :email, placeholder: "Email", autofocus: true %>
-              </div>
+        <div class="title text-center">
+          Welcome
+        </div>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="text-field-error">
+            <%= f.label :email %>
+            <%= f.email_field :email, required: true, autofocus: true %>
+          </div>
+          <div class="text-field-error">
+            <%= f.label :password %>
+            <%= f.password_field :password, required: true, autocomplete: "off" %>
+          </div>
+          <% if devise_mapping.rememberable? -%>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
             </div>
-            <div class="row collapse">
-              <div class="small-2 columns ">
-                <span class="prefix reg-img"><%= image_tag "ic_lock_black_36dp_1x.png" %></span>
-              </div>
-              <div class="small-10 columns ">
-                <%= f.password_field :password, placeholder: "Password", autocomplete: "off" %>
-              </div>
-              <% if devise_mapping.rememberable? -%>
-                <div class="field">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me %>
-                </div>
-              <% end -%>
-            </div>
-          <%= f.submit "Log In", class: "button" %>
+          <% end -%>
+
+          <div>
+            <%= f.submit "Sign In", class: "button expand" %>
+          </div>
+
+          <div class="text-center">
+            <%= render "devise/shared/links" %>
+          </div>
+
         <% end %>
       </div>
     </div>
-
-    <div class="large-6 columns auth-plain">
-    	<div class="signup-panel newusers">
-    		<p class="welcome"> New User?</p>
-    		<a href="#" data-reveal-id="registrationModal" class="button ">Sign Up</a></br>
-    	</div>
-    </div>
-
+    <br />
   </div>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<div id="registrationModal" class="reveal-modal remove-whitespace" data-reveal>
-  <div class="row">
-    <div class="small-12 columns auth-plain">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-        <div class="signup-panel center">
-          <p class="welcome">Sign Up</p>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.text_field :first_name, placeholder: "First Name", autofocus: true %>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.text_field :last_name, placeholder: "Last Name" %>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.email_field :email, placeholder: "Email" %>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.label :building_id %><br />
-                <%= f.select :building_id, Building.all.map { |b| [b.street, b.id] } %>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.label :unit, "Apartment Number" %><br />
-                <%= f.text_field :unit %>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.label :neighborhood_id %><br />
-                <%= f.select :neighborhood_id, Neighborhood.all.map { |n| [n.name, n.id] } %>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.label :password %>
-                <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> characters minimum)</em>
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "off" %>
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-12 columns">
-                <%= f.label :password_confirmation, "Password Confirmation" %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "off" %>
-              </div>
-            </div>
-          </div>
-            <div class="small-12 columns">
-          <%= f.submit "Sign Up", class: "button expand" %>
-          </div>
-      <% end %>
-    </div>
-    <a class="close-reveal-modal">&#215;</a>
 </div>

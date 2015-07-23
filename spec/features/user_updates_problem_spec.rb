@@ -71,6 +71,6 @@ feature 'user updates problem', %{
     expect(page).to_not have_link('Update')
 
     visit edit_user_problem_path(user, problem)
-    expect(page).to have_content('Log in')
+    expect(page).to have_content('Sign In')
   end
 end

@@ -16,6 +16,10 @@
 
  */
 
+.html {
+  background-color: #E0F2F1;
+}
+
 .tags {
   font-size: 10pt;
 }
@@ -55,7 +59,10 @@ body {
 
 body.problems-path {
   background-image: none;
-  background-color:
+}
+
+body.problems-path {
+  background-image: none;
 }
 
 /* Styles for signup panels */
@@ -106,4 +113,8 @@ margin-bottom: 0px;
 
 .newusers {
   background: #fff;
+}
+
+.signin-container {
+  margin-top: 10%;
 }

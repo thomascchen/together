@@ -23,7 +23,7 @@ class ProblemsController < ApplicationController
   def show
     @problem = Problem.find(params[:id])
     @solution = Solution.new
-
+    @problems_path = true
     @solutions = Solution.find_by_sql("
       SELECT problems.id, solutions.id, solutions.title, solutions.description,
         solutions.accepted, solutions.user_id, solutions.problem_id,
@@ -46,6 +46,7 @@ class ProblemsController < ApplicationController
     @problem = Problem.new
     @categories = Category.all
     @urgency_levels = UrgencyLevel.all
+    @problems_path = true
   end
 
   def create
@@ -61,6 +62,7 @@ class ProblemsController < ApplicationController
       flash.now[:error] = "Problem not saved"
       render :new
     end
+    @problems_path = true
   end
 
   def edit
@@ -68,6 +70,7 @@ class ProblemsController < ApplicationController
     @user = @problem.user
     @categories = Category.all
     @urgency_levels = UrgencyLevel.all
+    @problems_path = true
   end
 
   def update
@@ -81,6 +84,7 @@ class ProblemsController < ApplicationController
       flash.now[:error] = "Problem not updated"
       render :edit
     end
+    @problems_path = true
   end
 
   def destroy
@@ -91,6 +95,7 @@ class ProblemsController < ApplicationController
       flash[:error] = "Problem not deleted"
     end
     redirect_to problems_path
+    @problems_path = true
   end
 
   private

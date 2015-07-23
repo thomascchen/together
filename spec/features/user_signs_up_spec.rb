@@ -30,12 +30,12 @@ feature 'user registers', %{
     fill_in 'Last Name', with: 'Smith'
     fill_in 'Apartment Number', with: '1A'
     fill_in 'Email', with: 'john@example.com'
-    fill_in 'Password', with: 'password'
+    fill_in 'Password (8 characters minimum)', with: 'password'
     fill_in 'Password Confirmation', with: 'password'
     select building.street, from: 'Building'
     select neighborhood.name, from: 'Neighborhood'
 
-    click_button 'Sign up'
+    click_button 'Sign Up'
 
     expect(page).to have_content('Welcome! You have signed up successfully.')
     expect(page).to have_content('Problems')
@@ -46,7 +46,7 @@ feature 'user registers', %{
     visit root_path
     click_link 'Sign Up'
 
-    click_button 'Sign up'
+    click_button 'Sign Up'
     expect(page).to have_content("can't be blank")
     expect(page).to_not have_content('Sign Out')
   end
@@ -54,10 +54,10 @@ feature 'user registers', %{
   scenario 'password confirmation does not match password' do
     visit root_path
     click_link 'Sign Up'
-    fill_in 'Password', with: 'password'
+    fill_in 'Password (8 characters minimum)', with: 'password'
     fill_in 'Password Confirmation', with: 'passwodr'
 
-    click_button 'Sign up'
+    click_button 'Sign Up'
     expect(page).to have_content("doesn't match")
     expect(page).to_not have_content('Sign Out')
   end
