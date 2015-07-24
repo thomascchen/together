@@ -60,6 +60,7 @@ group :development, :test do
   gem 'shoulda-matchers', require: false
   gem 'pry-rails'
   gem "dotenv-rails"
+  gem "rack-mini-profiler"
 end
 
 group :production do

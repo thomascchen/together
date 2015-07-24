@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'highcharts' => 'charts#index'
 
+  resources :users, only: [:edit, :update, :destroy]
+
   resources :users, only: [:new, :create, :show] do
     resources :problems, except: [:index, :show]
   end
