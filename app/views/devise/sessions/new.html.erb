@@ -2,11 +2,9 @@
   <div class="medium-6 small-centered columns end">
     <div class="card">
       <div class="content">
-
         <div class="title text-center">
           Welcome
         </div>
-
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <%= devise_error_messages! %>
           <div class="text-field-error">
@@ -23,15 +21,12 @@
               <%= f.label :remember_me %>
             </div>
           <% end -%>
-
           <div>
             <%= f.submit "Sign In", class: "button expand" %>
           </div>
-
           <div class="text-center">
             <%= render "devise/shared/links" %>
           </div>
-
         <% end %>
       </div>
     </div>

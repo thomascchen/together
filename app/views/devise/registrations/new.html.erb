@@ -1,5 +1,5 @@
 <div class="row signin-container">
-  <div class="medium-12 columns end">
+  <div class="medium-10 columns small-centered">
     <div class="card">
       <div class="content">
 
@@ -7,7 +7,7 @@
           Sign Up
         </div>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post} ) do |f| %>
           <%= devise_error_messages! %>
           <div class="medium-6 columns large-collapse">
             <div class="text-field-error">
@@ -47,11 +47,15 @@
             </div>
           </div>
 
-          <div>
+          <div class="medium-12 columns ">
+              <br \>
             <%= f.submit "Sign Up", class: "button expand" %>
+              <br \>
+              <br \>
           </div>
 
         <% end %>
+
       </div>
     </div>
     <br />

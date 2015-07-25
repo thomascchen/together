@@ -1,4 +1,5 @@
 $teal : #29a68f;
+$darkteal : #259cbd;
 
 html,
 body {
@@ -38,10 +39,14 @@ body {
 
   a {
     color: $teal;
-    margin-right: 1.3rem;
+    // margin-right: 1.3rem;
     text-decoration: none;
     text-transform: uppercase;
     transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: $darkteal;
   }
 
   .image {

@@ -1,0 +1,36 @@
+<div class="row small-12 medium-10 large-8 columns small-centered user-container">
+  <div class="text-center">
+    <h1><%= @user.name %></h1>
+  </div>
+  <div class="card">
+    <div class="content">
+      <span class="title float left">
+        <span><%= @user.name %></span>
+        <p><%= link_to "Contact #{@user.first_name}", "mailto:#{@user.email}" %></p>
+      </span>
+      <p class="text-right"><%= @user.building.street%> <br \>
+      Apartment <%= @user.unit %> <br \>
+      <%= @user.neighborhood.name %>, <%= @user.building.state %></p>
+    </div>
+    <div class="action">
+      <span class="left">
+        Member since <%= @user.created_at.strftime("%B %e, %Y") %>
+      </span>
+      <span class="right">
+        <% if !@user.problems.present? && !@user.problems.present? %>
+          <%= @user.first_name %> has no activity
+        <% elsif @user.problems.present? && !@user.solutions.present? %>
+          Last active <%= @user.problems.order(:updated_at).last.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %>
+        <% elsif @user.solutions.present? && !@user.problems.present? %>
+          Last active <%= @user.solutions.order(:updated_at).last.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %>
+        <% elsif @user.problems.order(:updated_at).last.updated_at > @user.solutions.order(:updated_at).last.updated_at %>
+          Last active <%= @user.problems.order(:updated_at).last.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %>
+        <% elsif @user.problems.order(:updated_at).last.updated_at < @user.solutions.order(:updated_at).last.updated_at %>
+          Last active <%= @user.solutions.order(:updated_at).last.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %>
+        <% end %>
+      </span>
+    <br />
+    </div>
+  </div>
+  <br />
+</div>
