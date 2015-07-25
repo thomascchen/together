@@ -64,5 +64,4 @@ feature 'user views profile', %{
   end
 
   pending 'user can view photo and data visualization'
-
 end

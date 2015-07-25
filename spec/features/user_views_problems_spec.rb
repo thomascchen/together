@@ -50,6 +50,7 @@ feature 'user views unsolved problems', %{
 
     sign_in(user)
 
+    expect(page).to have_content("We're Better Together")
     expect(page).to have_content(problem.title)
     expect(page).to have_content(problem.category.name)
     expect(page).to have_content(problem.urgency_level.name)
@@ -113,6 +114,5 @@ feature 'user views unsolved problems', %{
       "div .columns span:nth-child(1) a:last",
       text: solved_problem.title
     )
-
   end
 end
