@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "js-cookie/js.cookie.js" %>
+<% end %>
+
 <div class="row">
   <div class="large-12 columns">
     <div>
@@ -9,3 +13,14 @@
 </div>
 
 <%= render 'problems_list' %>
+
+<a href="#" data-reveal-id="welcomeModal" class="welcome-modal" style="display: none"></a>
+
+<div id="welcomeModal" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div class="text-center welcome-title">
+    <h2 id="modalTitle">We're Better <strong>Together</strong></h2>
+  </div>
+  <p><strong>Together</strong> helps tenants identify problems in their apartment building and solve those problems by working together.</p>
+  <p>Get started with these recent problems reported by your neighbors. Click to learn more and propose a solution. Use the +1 button to show that you think a problem is important or that you agree with a solution. You can also view Building Data to learn more about the building as a whole.</p>
+  <p>When you're ready, report a new problem to get help from your neighbors.</p>
+</div>
