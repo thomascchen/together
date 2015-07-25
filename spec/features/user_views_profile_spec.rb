@@ -25,7 +25,7 @@ feature 'user views profile', %{
     )
   end
   let(:user) do
-    FactoryGirl.create(:user, building: building, neighborhood: allston )
+    FactoryGirl.create(:user, building: building, neighborhood: allston)
   end
 
   scenario 'authenticated user views profile' do
