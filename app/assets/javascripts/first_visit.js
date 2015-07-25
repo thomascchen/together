@@ -3,6 +3,6 @@ $(document).ready(function() {
     if (Cookies.get('dialogShown') != 'true') {
       $('.welcome-modal').trigger('click');
       Cookies.set('dialogShown', 'true', { expires: 1 });
-    };
+    }
   });
 });
