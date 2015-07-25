@@ -24,15 +24,15 @@ feature 'user signs in', %{
   end
   let(:user) { FactoryGirl.create(:user, building: building, neighborhood: allston ) }
 
-  scenario 'authenticated user deletes account' do
-    sign_in(user)
-    visit root_path
-    click_link 'Account'
-    click_link 'Edit Profile'
-    click_on 'Delete Account'
-
-    expect(page).to have_content('Sign In')
-  end
+  pending 'authenticated user deletes account'
+  #   sign_in(user)
+  #   visit root_path
+  #   click_link 'Account'
+  #   click_link 'Edit Profile'
+  #   click_on 'Delete Account'
+  #
+  #   expect(page).to have_content('Sign In')
+  # end
 
   scenario 'unauthenticated cannot delete acount' do
     visit root_path

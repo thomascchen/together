@@ -31,7 +31,7 @@ feature 'user views profile', %{
     visit user_path(user)
 
     expect(page).to have_content(user.name)
-    expect(page).to have_link("Edit Profile")
+    # expect(page).to have_link("Edit Profile")
     expect(page).to have_content(user.building.street)
     expect(page).to have_content("Apartment #{user.unit}")
     expect(page).to have_content("#{user.neighborhood.name}, #{user.building.state}")
