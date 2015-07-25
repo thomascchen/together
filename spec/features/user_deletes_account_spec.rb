@@ -22,7 +22,10 @@ feature 'user signs in', %{
       neighborhood: allston
     )
   end
-  let(:user) { FactoryGirl.create(:user, building: building, neighborhood: allston ) }
+
+  let(:user) do
+    FactoryGirl.create(:user, building: building, neighborhood: allston)
+  end
 
   pending 'authenticated user deletes account'
   #   sign_in(user)

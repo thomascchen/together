@@ -24,7 +24,9 @@ feature 'user views profile', %{
       neighborhood: allston
     )
   end
-  let(:user) { FactoryGirl.create(:user, building: building, neighborhood: allston ) }
+  let(:user) do
+    FactoryGirl.create(:user, building: building, neighborhood: allston )
+  end
 
   scenario 'authenticated user views profile' do
     sign_in(user)
@@ -34,21 +36,31 @@ feature 'user views profile', %{
     # expect(page).to have_link("Edit Profile")
     expect(page).to have_content(user.building.street)
     expect(page).to have_content("Apartment #{user.unit}")
-    expect(page).to have_content("#{user.neighborhood.name}, #{user.building.state}")
+    expect(page).to have_content(
+      "#{user.neighborhood.name}, #{user.building.state}"
+    )
     expect(page).to have_content("#{user.first_name} has no activity")
-    expect(page).to have_content("Member since #{user.created_at.strftime("%B %e, %Y")}")
+    expect(page).to have_content(
+      "Member since #{user.created_at.strftime('%B %e, %Y')}"
+    )
   end
 
   scenario 'unauthenticated user cannot view profile' do
     visit user_path(user)
 
-    expect(page).to_not have_content( user.name)
-    expect(page).to_not have_link("Contact #{user.first_name}", href: "mailto:#{user.email}")
+    expect(page).to_not have_content(user.name)
+    expect(page).to_not have_link(
+      "Contact #{user.first_name}", href: "mailto:#{user.email}"
+    )
     expect(page).to_not have_content(user.building.street)
     expect(page).to_not have_content("Apartment #{user.unit}")
-    expect(page).to_not have_content("#{user.neighborhood.name}, #{user.building.state}")
+    expect(page).to_not have_content(
+      "#{user.neighborhood.name}, #{user.building.state}"
+    )
     expect(page).to_not have_content("#{user.first_name} has no activity")
-    expect(page).to_not have_content("Member since #{user.created_at.strftime("%B %e, %Y")}")
+    expect(page).to_not have_content(
+      "Member since #{user.created_at.strftime('%B %e, %Y')}"
+    )
   end
 
   pending 'user can view photo and data visualization'

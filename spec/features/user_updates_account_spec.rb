@@ -27,7 +27,9 @@ feature 'user updates account', %{
     )
   end
 
-  let(:user) { FactoryGirl.create(:user, building: building, neighborhood: allston) }
+  let(:user) do
+    FactoryGirl.create(:user, building: building, neighborhood: allston)
+  end
 
   pending 'authenticated user submits valid information'
   #   sign_in(user)
@@ -37,13 +39,16 @@ feature 'user updates account', %{
   #   fill_in 'Last Name', with: 'Chen'
   #   fill_in 'Email', with: 't@t.com'
   #   fill_in 'Apartment Number', with: '10'
-  #   fill_in 'Password (Leave blank to keep current password)', with: "newpassword"
+  #   fill_in 'Password (Leave blank to keep current password)',
+  #     with: "newpassword"
   #   fill_in 'Password Confirmation', with: "newpassword"
   #   fill_in "user_current_password", with: 'password'
   #
   #   click_button("Update Profile")
   #
-  #   expect(page).to have_content("Your account has been updated successfully.")
+  #   expect(page).to have_content(
+  #     "Your account has been updated successfully."
+  #   )
   # end
 
   pending 'authenticated user submits invalid information'
