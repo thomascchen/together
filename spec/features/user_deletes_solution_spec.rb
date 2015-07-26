@@ -41,7 +41,7 @@ feature 'user deletes a solution', %{
   scenario 'authenticated user deletes solution', js: true do
     sign_in(user)
     click_on problem.title
-    click_link 'Delete Solution'
+    click_link 'deletesolution'
 
     click_link 'Delete', href: problem_solution_path(problem, solution)
 

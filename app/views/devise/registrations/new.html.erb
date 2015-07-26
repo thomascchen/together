@@ -30,7 +30,7 @@
 
           <div class="medium-6 columns large-collapse">
             <div class="text-field-error">
-              <%= f.label :unit, "Apartment Number" %>
+              <%= f.label :unit, "Apartment" %>
               <%= f.text_field :unit %>
             </div>
             <div class="text-field-error">
@@ -46,16 +46,13 @@
               <%= f.password_field :password_confirmation, autocomplete: "off" %>
             </div>
           </div>
-
           <div class="medium-12 columns ">
               <br \>
             <%= f.submit "Sign Up", class: "button expand" %>
               <br \>
               <br \>
           </div>
-
         <% end %>
-
       </div>
     </div>
     <br />

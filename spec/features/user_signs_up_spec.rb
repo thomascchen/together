@@ -28,7 +28,7 @@ feature 'user registers', %{
     click_link 'Sign Up'
     fill_in 'First Name', with: 'John'
     fill_in 'Last Name', with: 'Smith'
-    fill_in 'Apartment Number', with: '1A'
+    fill_in 'Apartment', with: '1A'
     fill_in 'Email', with: 'john@example.com'
     fill_in 'Password (8 characters minimum)', with: 'password'
     fill_in 'Password Confirmation', with: 'password'

@@ -45,7 +45,7 @@
             <p><%= problem.description %></p>
           </div>
           <div class="action">
-            <span class="left">Submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>
+            <span class="left">Problem submitted by <%= link_to problem.user.name, user_path(problem.user) %></span>
             <span class="right">Updated <%= problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
           <br />
           </div>

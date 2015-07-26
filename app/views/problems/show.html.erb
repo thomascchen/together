@@ -1,4 +1,13 @@
 <div>
+  <div class="row">
+    <div class="large-12 columns">
+      <div>
+        <br \>
+        <h1 class="text-center"><%= @problem.title %></h1>
+        <br \>
+      </div>
+    </div>
+  </div>
   <% if @solution.errors.any? %>
     <div>
       <h2>
@@ -11,9 +20,9 @@
         <% end %>
       </p>
     </div>
+    <br />
+    <br />
   <% end %>
-<br />
-<br />
 <div class="row">
   <span class="vote left">
     <% if ProblemVote.where(problem: @problem).first == nil || ProblemVote.where(problem: @problem).sum(:vote) == 0 %>
@@ -78,16 +87,16 @@
           <% if @problem.status.name == "Solved" %>
           <span class="tags success label status-label"><%= @problem.status.name %></span>
           <% end %>
+          <% if current_user == @problem.user %>
+            <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem), class: "button secondary tiny" %><a href="#" data-reveal-id="deleteProblemModal" class="button secondary alert tiny">Delete</a>
+          <% end %>
         </span>
           <p><%= @problem.description %></p>
         </div>
       <% end %>
     <div class="action">
       <span class="left">
-        Submitted by <%= link_to @problem.user.name, user_path(@problem.user) %>
-        <% if current_user == @problem.user %>
-          <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem) %> <a href="#" data-reveal-id="deleteProblemModal">Delete Problem</a>
-        <% end %>
+        Problem submitted by <%= link_to @problem.user.name, user_path(@problem.user) %>
       </span>
       <span class="right">
         Updated <%= @problem.updated_at.strftime("%B %e, %Y at %l:%M:%S %p") %>
@@ -97,6 +106,7 @@
   </div>
   <br />
 
+<% if @problem.status_id == 1 %>
   <ul class="accordion small-11 columns text-center submit-solution" data-accordion>
     <li class="accordion-navigation">
       <a href="#panel1a" class="submit-solution-button">Submit Solution</a>
@@ -106,9 +116,12 @@
       <br />
     </li>
   </ul>
+<% else %>
+  <div class="line-break">
+  </div>
+<% end %>
 
 <br \>
-
   <div class="row">
     <div class="medium-12 columns end">
       <% if @problem.solutions %>
@@ -137,9 +150,11 @@
 
           <div class="card">
             <div class="content">
-              <span class="title"><%= solution.title %></span>
+              <span class="title">
+                <%= solution.title %>
+              </span>
               <% if solution.accepted == true %>
-                  <span class="tags success label">Accepted</span>
+                  <span class="tags success label accepted-button">Accepted</span>
               <% end %>
               <% if solution.accepted == true && current_user == @problem.user %>
                 <span class="right">
@@ -169,14 +184,16 @@
                   <% end %>
                 </span>
               <% end %>
+              <span class="right">
+                <% if current_user == solution.user %>
+                  <%= link_to "Edit", edit_problem_solution_path(@problem, solution), class: "button secondary tiny" %><a href="#" data-reveal-id="deleteSolutionModal" class="button secondary alert tiny" id="deletesolution">Delete</a>
+                <% end %>
+              </span>
               <p><%= solution.description %></p>
             </div>
             <div class="action">
               <span class="left">
-                Submitted by <%= link_to solution.user.name, user_path(solution.user) %>
-                <% if current_user == solution.user %>
-                  <%= link_to "Edit", edit_problem_solution_path(@problem, solution) %> <a href="#" data-reveal-id="deleteSolutionModal">Delete Solution</a>
-                <% end %>
+                Solution submitted by <%= link_to solution.user.name, user_path(solution.user) %>
               </span>
               <span class="right">Created <%= solution.created_at.strftime("%B %e, %Y at %l:%M:%S %p") %></span>
             <br />
