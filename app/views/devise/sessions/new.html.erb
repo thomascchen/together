@@ -9,11 +9,11 @@
           <%= devise_error_messages! %>
           <div class="text-field-error">
             <%= f.label :email %>
-            <%= f.email_field :email, required: true, autofocus: true %>
+            <%= f.email_field :email, required: true, autofocus: true, value: "guest@example.com" %>
           </div>
           <div class="text-field-error">
             <%= f.label :password %>
-            <%= f.password_field :password, required: true, autocomplete: "off" %>
+            <%= f.password_field :password, required: true, autocomplete: "off", value: "password" %>
           </div>
           <% if devise_mapping.rememberable? -%>
             <div class="field">

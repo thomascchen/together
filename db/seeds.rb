@@ -6,13 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-neighborhood = Neighborhood.find_or_create_by(name: "Allston") # 1
+Neighborhood.find_or_create_by(name: "Allston") # 1
 Neighborhood.find_or_create_by(name: "Back Bay") # 2
 Neighborhood.find_or_create_by(name: "Bay Village") # 3
 Neighborhood.find_or_create_by(name: "Beacon Hill") # 4
 Neighborhood.find_or_create_by(name: "Brighton") # 5
 Neighborhood.find_or_create_by(name: "Charlestown") # 6
-Neighborhood.find_or_create_by(name: "Chinatown") # 7
+neighborhood = Neighborhood.find_or_create_by(name: "Chinatown") # 7
 Neighborhood.find_or_create_by(name: "Dorchester") # 8
 Neighborhood.find_or_create_by(name: "Downtown") # 9
 Neighborhood.find_or_create_by(name: "East Boston") # 10
@@ -30,25 +30,25 @@ Neighborhood.find_or_create_by(name: "West End") # 21
 Neighborhood.find_or_create_by(name: "West Roxbury") # 22
 
 building = Building.find_or_create_by(
-  street: '21 Jumpstreet',
+  street: '33 Harrison Ave.',
   city: 'Boston',
   state: 'MA',
-  zip: '02130',
+  zip: '02111',
   neighborhood_id: neighborhood.id
 )
 
 User.create(
-  email: 'john@example.com',
+  email: 'guest@example.com',
   password: 'password',
   password_confirmation: 'password',
-  first_name: 'John',
-  last_name: 'Smith',
+  first_name: 'Guest',
+  last_name: 'User',
   unit: '1A',
   role: 'tenant',
   building_id: building.id,
   neighborhood_id: neighborhood.id,
-  phone: '123-456-7890',
-  description: 'This is a description.'
+  phone: '617-123-4567',
+  description: 'This account has been created for demonstration purposes'
 )
 
 Category.find_or_create_by(name: 'Repairs')
@@ -64,12 +64,3 @@ UrgencyLevel.create(name: 'Not Urgent')
 
 Status.find_or_create_by(name: 'Open')
 Status.find_or_create_by(name: 'Solved')
-
-Problem.create(
-  title: "Problem!",
-  description: 'This a description',
-  category_id: 2,
-  urgency_level_id: 2,
-  status_id: 1,
-  user_id: 1
-)
