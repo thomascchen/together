@@ -67,6 +67,9 @@
           <% if @problem.status.name == "Solved" %>
           <span class="tags success label status-label"><%= @problem.status.name %></span>
           <% end %>
+          <% if current_user == @problem.user %>
+            <%= link_to "Edit", edit_user_problem_path(@problem.user, @problem), class: "button secondary tiny" %><a href="#" data-reveal-id="deleteProblemModal" class="button secondary alert tiny">Delete</a>
+          <% end %>
         </span>
         <p><%= @problem.description %></p>
       </div>
