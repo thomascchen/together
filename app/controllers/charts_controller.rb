@@ -16,8 +16,8 @@ class ChartsController < ApplicationController
     @user_contributions = @sorted_users.map do |user|
       {
         name: user.name,
-        y: ((user.problems.count.to_f + user.solutions.count.to_f) /
-          (Problem.count.to_f + Solution.count.to_f)).to_f,
+        y: ((((user.problems.count.to_f + user.solutions.count.to_f) /
+          (Problem.count.to_f + Solution.count.to_f)).to_f) * 100).to_f,
         drilldown: user.name
       }
     end
@@ -28,14 +28,14 @@ class ChartsController < ApplicationController
         id: user.name,
         data: [
           ['Problems Proposed',
-            (user.problems.count.to_f /
-            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
+            (((user.problems.count.to_f /
+            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f) * 100).to_f],
           ['Solutions Proposed',
-            (user.solutions.count.to_f /
-            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f],
+            (((user.solutions.count.to_f /
+            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f) * 100).to_f],
           ['Solutions Accepted',
-            (user.solutions.where(accepted: true).count.to_f /
-            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f]
+            (((user.solutions.where(accepted: true).count.to_f /
+            (user.problems.count.to_f + user.solutions.count.to_f).to_f).to_f) * 100).to_f]
         ],
         total: ((user.problems.count.to_f + user.solutions.count.to_f) /
           (Problem.count.to_f + Solution.count.to_f)).to_f
