@@ -32,7 +32,7 @@ feature 'user deletes a problem', %{
   scenario 'user deletes problem they created', js: true do
     sign_in(user)
     click_on problem.title
-    click_link 'Delete Problem'
+    click_link 'Delete'
 
     click_link 'Delete', href: user_problem_path(problem.user, problem)
     expect(page).to have_content("Problem deleted")
