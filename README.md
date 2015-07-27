@@ -2,7 +2,7 @@
 
 ![Build Status](https://codeship.com/projects/c09887b0-04b6-0133-8447-52ca95efad4a/status?branch=master) [![Code Climate](https://codeclimate.com/github/thomascchen/together.png)](https://codeclimate.com/github/thomascchen/together)  [![Coverage Status](https://coveralls.io/repos/thomascchen/together/badge.svg?branch=master&service=github)](https://coveralls.io/github/thomascchen/together?branch=master)
 
-Note: Coveralls is currently down for maintenance, so coverage % badge may not be accurate. Latest Codeship build shows coverage at 96.36%.
+Note: Coveralls has been down for maintenance, so coverage % badge may not be accurate. Latest Codeship build shows coverage at 96.36%.
 
 ## About
 **Together** is a tenant organizing app that helps tenants identify problems in their apartment building and find solutions to those problems with the help of their neighbors. Housing inequality has been a big focus in my academic and volunteer work, and I wanted to build something that brought city dwellers together to address some common issues that come up in apartment buildings, especially when dealing with an irresponsible or absentee landlord.
