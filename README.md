@@ -22,13 +22,13 @@ If you'd like to explore the app without creating an account, feel free to use t
 
 ![Imgur](http://i.imgur.com/4ABJmLB.png)
 
-- I used jQuery and Ajax to create a +1 upvote button that lets users show that they think a problem is important or that they agree with a solution.
-
-![Imgur](http://i.imgur.com/i79oZDr.gif)
-
 - Users can accept a solution to a problem they submitted by clicking "Accept Solution." This marks the solution as accepted and the problem as solved. Solved Problems are moved out of the main page and into Solved Problems page which serves as a historical record of activity in the building over time.
 
 ![Imgur](http://i.imgur.com/mfLMKLp.png)
+
+- I used jQuery and Ajax to create a +1 upvote button that lets users show that they think a problem is important or that they agree with a solution.
+
+![Imgur](http://i.imgur.com/i79oZDr.gif)
 
 - I used the HighCharts API to create data visualizations that give users a higher level view of the problems in the building by category, and a leaderboard of user contributions.
 
@@ -36,7 +36,7 @@ If you'd like to explore the app without creating an account, feel free to use t
 
 - I wrote custom SQL queries to sort Problems and Solutions. Open Problems are ordered first by urgency, then by time last updated, and finally by number of upvotes. Solutions are ordered first by number of upvotes and second by time last updated. Solved Problems are ordered by when they were solved.
 - I applied Material Design principles to the front end using Foundation and custom SASS and CSS.
-- I created a Welcome modal that launches on the main page only after the first login, using js-cookie. For demonstration purposes, I've set the browser cookie to reset once a day.  
+- A welcome modal launches on the main page after the first login, using js-cookie. For demonstration purposes, I've set the browser cookie to reset once a day.  
 
 ## ERD
 ![Imgur](http://i.imgur.com/urJmHdO.png)
