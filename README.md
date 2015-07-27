@@ -6,7 +6,7 @@
 **Together** is a tenant organizing app that helps tenants identify problems in their apartment building and find solutions to those problems with the help of their neighbors. Housing inequality has been a big focus of my academic and volunteer work, and I wanted to build something that helped city dwellers address some of the common issues that come up in apartment buildings, especially when dealing with an irresponsible or absentee landlord.
 
 ## Website and Logging In
-[https://tenants-together.herokuapp.com](https://tenants-together.herokuapp.com)
+[http://tenants-together.herokuapp.com](http://tenants-together.herokuapp.com)
 
 If you'd like to explore the app without creating an account, please use the following credentials:
 
